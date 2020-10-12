@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    move2kube.service.expose: "true"
+  creationTimestamp: null
+  labels:
+    io.move2kube.service: api
+  name: api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      io.move2kube.service: api
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        move2kube.service.expose: "true"
+      creationTimestamp: null
+      labels:
+        io.move2kube.service: api
+      name: api
+    spec:
+      containers:
+        - env:
+            - name: REDIS_URL
+              value: redis://redis:6379
+          image: fibonacci-api:latest
+          imagePullPolicy: Always
+          name: api
+          ports:
+            - containerPort: 1234
+              protocol: TCP
+          resources: {}
+      restartPolicy: Always
+status: {}

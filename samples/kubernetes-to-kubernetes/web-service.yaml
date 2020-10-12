@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    move2kube.service.expose: "true"
+  creationTimestamp: null
+  labels:
+    io.move2kube.service: web
+  name: web
+spec:
+  ports:
+    - name: "80"
+      port: 80
+      targetPort: 80
+  selector:
+    io.move2kube.service: web
+  type: ClusterIP
+status:
+  loadBalancer: {}

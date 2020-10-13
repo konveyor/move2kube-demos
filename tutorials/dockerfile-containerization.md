@@ -2,7 +2,7 @@
 
 ## Description
 
-This document helps you to adding customized docker files which could be parameterized using detect scripts which could detect your application, extract any parameters from it and supply them to Move2Kube so that docker file with appropriate parameters is generated for your application gets created. We use `samples/language-platforms/java-maven` as a running example to illustrate the steps.
+This document helps you to add customized docker files which could be parameterized using scripts which could detect your application, extract any parameters from it and supply them to Move2Kube so that docker file with appropriate parameters is generated for your application gets created. We use `samples/language-platforms/java-maven` as a running example to illustrate the steps.
 
 ## Steps
 
@@ -22,21 +22,13 @@ This document helps you to adding customized docker files which could be paramet
     ```
     echo '{"Port": 8080, "APPNAME": "app"}'
     ```
-4. Copy your  `m2kdfdetect.sh` file to `samples/language-platforms/java-maven`. This script is supposed to perform the following functions:
-    - Detect the language-platform
-    - Extract the required parameters from the source artefacts so as to fill the dockerfile template created previously (E.g. APPNAME, Port).
-    - A typical example of the detect script is shown [here](https://github.com/konveyor/move2kube/blob/master/internal/assets/dockerfiles/nodejs/m2kdfdetect.sh).
-    - The script has to return the paramaters in json format if the matching language-platform is detected. If not, it should exit with exit code `1`. Following is an illustration for the `java-maven` language-platform:
-    ```
-    echo '{"Port": 8080, "APPNAME": "app"}'
-    ```
-3. Copy your `Dockerfile` to `samples/language-platforms/java-maven`. To get a feel for the templates, check out other existing dockerfile containerizers [here](https://github.com/seshapad/move2kube/blob/master/internal/assets/dockerfiles/nodejs/Dockerfile).
-4. Generate and test: 
-    - Do `move2kube plan -s <srcfolder>; move2kube translate` (e.g. `<srcfolder>` is `sample/java-maven` or your sample application).
+4. Copy your `Dockerfile` and `m2kdfdetect.sh` to your application source folder (e.g. `samples/language-platforms/java-maven`).
+5. Generate and test: 
+    - Do `move2kube plan -s <srcfolder>; move2kube translate` (e.g. `<srcfolder>` is `samples/language-platforms/java-maven` or your sample application).
     - Answer the questions for customization and you will get in the output directory (e.g `myproject`):
         - Dockerfiles required to create the containers.
         - Shell scripts to build these containers.
         - Yaml files required for deploying these containers in kubernetes.
-    - In `myproject` directory, do `copysources.sh ../sampleslanguage-platforms/java-maven` to copy sources for which container has to be created.
-    - Do `buildimages.sh` to build the container. Once the image is built, `docker images` should list the image `java-maven:latest`.
-    - If there are no bugs, then the image could be seen in the output of `docker images` command and could be run with the `docker run` command.
+    - In the output directory, do `sh copysources.sh samples/language-platforms/java-maven` to copy sources for which container has to be created.
+    - Do `sh buildimages.sh` to build the container. Once the image is built, `docker images` should list the image `java-maven:latest`.
+    - If there are no bugs, then the image could be run with `docker run` command.

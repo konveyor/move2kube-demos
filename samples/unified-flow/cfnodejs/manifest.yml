@@ -1,0 +1,7 @@
+---
+applications:
+    -
+        name: move2kube-demo-cf
+        random-route: true
+        memory: 256M
+...

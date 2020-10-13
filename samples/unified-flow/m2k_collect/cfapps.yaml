@@ -1,0 +1,10 @@
+apiVersion: move2kube.io/v1alpha1
+kind: CfInstanceApps
+spec:
+  applications:
+    - name: move2kube-demo-cf
+      detectedBuildpack: sdk-for-nodejs
+      memory: 256
+      instances: 1
+      ports:
+        - 8080

@@ -1,6 +1,8 @@
 
 ## Tutorials
 
+![Move2Kube Usecases](./imgs/m2k-usecases.png)
+
 Tutorials about using Move2Kube to generate target artifacts for various source platforms can be found below.
 
 * [Cloud Foundry](./tutorials/cloud-foundry.md)

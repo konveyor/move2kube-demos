@@ -97,7 +97,7 @@ INFO[0003] Translated target artifacts can be found at [myproject].
 
 ### Two step involved approach
 
-1. **Plan** : Place source code in a directory say `src` and generate a plan. For example, you can use the [samples](./samples) directory.
+1. **Plan** : Place source code in a directory say `src` and generate a *plan*. For example, you can use the [samples](./samples) directory.
 
 ```
 $ move2kube plan -s src/
@@ -125,9 +125,11 @@ INFO[0004] [*metadata.QACacheLoader] Done
 INFO[0004] Metadata planning done                       
 INFO[0004] Plan can be found at [m2k.plan].
 ```
+Generates a *plan* file containing a transformation proposal (including containerization options) for all the services discovered from various sources.
+
 2. **Translate** : In the same directory, invoke the below command.
 ```
 $ move2kube translate
 ```
 
-Note: If information about any runtime instance say cloud foundry or kubernetes cluster needs to be collected use `move2kube collect`. You can place the collected data in the src directory used in the plan.
+Note: If information about any runtime instance say cloud foundry or kubernetes cluster needs to be collected, use `move2kube collect`. You can place the collected data in the src directory used in the plan. (Optional)

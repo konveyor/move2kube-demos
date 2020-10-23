@@ -17,24 +17,9 @@ Running Move2Kube is a simple single-step process. Move2Kube takes as input the 
 ![Move2Kube-Usage](./imgs/m2k-usage.png)
 
 For more detailed information :
+* [Installation](./install.md)
 * [Getting Started](./GettingStarted.md)
 * [Tutorials](./Tutorials.md)
-
-## Installation
-Command line :
-```
-$ curl -L https://raw.githubusercontent.com/konveyor/move2kube/master/scripts/install.sh | bash -
-```
-
-UI :
-```
-$ git clone https://github.com/konveyor/move2kube-ui
-```
-```
-$ docker-compose up
-```
-The UI will now be accessible in http://localhost:8080.
-
 
 ## Discussion
 

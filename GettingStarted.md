@@ -5,7 +5,7 @@ There are two ways of running Move2Kube over the source artifacts.
 ### One step simple approach
 
 ##### Input
-* `src/` – Directory containing the source artifacts.
+* `src/` – Directory containing the source artifacts. Copy the `docker-compose` folder from the [samples](https://github.com/konveyor/move2kube-demos/tree/main/samples/docker-compose) and paste it inside the `src/`.
 
 ##### Run
 ```

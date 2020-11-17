@@ -3,5 +3,11 @@ version: "3"
 services:
     web:
         image: nginx:stable-alpine
+        entrypoint:
+            [
+                "sh",
+                "-c",
+                'cd /usr/share/nginx/html/ && mkdir web && cp * web/ ; nginx -g "daemon off;"',
+            ]
         ports:
             - "8080:80"

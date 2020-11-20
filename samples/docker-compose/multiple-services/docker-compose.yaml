@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
     api:
@@ -10,6 +10,8 @@ services:
             - REDIS_URL=redis://redis:6379
     redis:
         image: redis
+        ports:
+            - "6379:6379"
     web:
         image: fibonacci-web:latest
         build: ./web

@@ -1,0 +1,51 @@
+apiVersion: move2kube.konveyor.io/v1alpha1
+kind: QACache
+spec:
+  solutions:
+    - description: 'Select all translation types that you are interested in:'
+      context:
+        - Services that don't support any of the translation types you are interested in will be ignored.
+      solution:
+        type: MultiSelect
+        default:
+          - Dockerfile2Kube
+          - Compose2Kube
+          - Any2Kube
+        options:
+          - Dockerfile2Kube
+          - Compose2Kube
+          - Any2Kube
+        answer:
+          - Compose2Kube
+      resolved: true
+    - description: 'Select all containerization modes that is of interest:'
+      context:
+        - Services that don't support any of the containerization techniques you are interested in will be ignored.
+      solution:
+        type: MultiSelect
+        default:
+          - ReuseDockerfile
+          - Reuse
+        options:
+          - ReuseDockerfile
+          - Reuse
+        answer:
+          - ReuseDockerfile
+          - Reuse
+      resolved: true
+    - description: 'Choose the artifact type:'
+      context:
+        - Yamls - Generate Kubernetes Yamls
+        - Helm - Generate Helm chart
+        - Knative - Create Knative artifacts
+      solution:
+        type: Select
+        default:
+          - Yamls
+        options:
+          - Yamls
+          - Helm
+          - Knative
+        answer:
+          - Helm
+      resolved: true

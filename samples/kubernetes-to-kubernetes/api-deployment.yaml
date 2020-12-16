@@ -26,7 +26,7 @@ spec:
         - env:
             - name: REDIS_URL
               value: redis://redis:6379
-          image: fibonacci-api:latest
+          image: quay.io/konveyor/fibonacci-api:latest
           imagePullPolicy: Always
           name: api
           ports:

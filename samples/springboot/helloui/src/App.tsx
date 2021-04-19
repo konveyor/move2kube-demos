@@ -4,18 +4,22 @@ import './App.css';
 
 class App extends Component {
 
+  serverhosts = [ "http://localhost:8080", "" ]
+
   state = {
-    name: "Hello internal!",
-    host: "localhost"
+      name: "Hello internal!",
+      host: "localhost"
   }
 
   componentDidMount() {
-    fetch('http://localhost:8080/hello')
-    .then(res => res.json())
-    .then((data) => {
-      this.setState(data)
-    })
-    .catch(console.log)
+    for (var serverhost of this.serverhosts) {
+      fetch(serverhost+'/hello')
+        .then(res => res.json())
+        .then((data) => {
+          this.setState(data)
+        })
+        .catch(()=>{})
+      }
   }
 
   render () {

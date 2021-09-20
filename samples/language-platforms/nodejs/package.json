@@ -1,5 +1,5 @@
 {
-  "name" : "main",
+  "name" : "nodewebserver",
   "version" : "0.1.0",
   "description": "This is a test web server",
   "keywords": ["test", "webserver"],

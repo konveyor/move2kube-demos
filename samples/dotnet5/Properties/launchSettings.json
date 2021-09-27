@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "net5app": {
+    "dotnet5": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

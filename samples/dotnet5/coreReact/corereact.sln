@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.809.10
+VisualStudioVersion = 16.0.809.8
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet5", "dotnet5.csproj", "{984A45C3-5D43-440F-953A-3A0AD18EF503}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "corereact", "corereact\corereact.csproj", "{177BBDC2-DE4E-4F61-AE8C-9D36089E315A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{984A45C3-5D43-440F-953A-3A0AD18EF503}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{984A45C3-5D43-440F-953A-3A0AD18EF503}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{984A45C3-5D43-440F-953A-3A0AD18EF503}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{984A45C3-5D43-440F-953A-3A0AD18EF503}.Release|Any CPU.Build.0 = Release|Any CPU
+		{177BBDC2-DE4E-4F61-AE8C-9D36089E315A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{177BBDC2-DE4E-4F61-AE8C-9D36089E315A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{177BBDC2-DE4E-4F61-AE8C-9D36089E315A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{177BBDC2-DE4E-4F61-AE8C-9D36089E315A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {4A1AEEE8-2E03-4834-8FD2-7A2386A24881}
+		SolutionGuid = {CBCE1164-3176-4CA9-AD4D-4CB92F82299B}
 	EndGlobalSection
 EndGlobal

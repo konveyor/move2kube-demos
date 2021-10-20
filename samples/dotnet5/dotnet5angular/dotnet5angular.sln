@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.809.8
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet5angular", "dotnet5angular.csproj", "{ED8BF6CA-DBCA-4E1D-BC55-EF0038380CE6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED8BF6CA-DBCA-4E1D-BC55-EF0038380CE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED8BF6CA-DBCA-4E1D-BC55-EF0038380CE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED8BF6CA-DBCA-4E1D-BC55-EF0038380CE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED8BF6CA-DBCA-4E1D-BC55-EF0038380CE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF0AC4C7-E8FE-400F-88DB-386D75FD9618}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF0AC4C7-E8FE-400F-88DB-386D75FD9618}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF0AC4C7-E8FE-400F-88DB-386D75FD9618}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF0AC4C7-E8FE-400F-88DB-386D75FD9618}.Release|Any CPU.Build.0 = Release|Any CPU
+		{357E6206-4A97-4EDC-9050-A83090F6C4EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{357E6206-4A97-4EDC-9050-A83090F6C4EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{357E6206-4A97-4EDC-9050-A83090F6C4EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{357E6206-4A97-4EDC-9050-A83090F6C4EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {35C982E1-E382-48B7-BE08-15365EE438ED}
+	EndGlobalSection
+EndGlobal

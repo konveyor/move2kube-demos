@@ -16,8 +16,12 @@ from flask import Flask, jsonify
 
 simpleRestApiApp = Flask (__name__)
 
-@simpleRestApiApp.route("/python")
-def api():
+@simpleRestApiApp.route("/get")
+def get():
+    return jsonify(message="This is a Python REST API")
+
+@simpleRestApiApp.errorhandler(404)
+def handle_404(e):
     return jsonify(message="This is a Python REST API")
 
 if __name__ == "__main__":

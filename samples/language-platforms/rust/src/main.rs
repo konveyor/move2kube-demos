@@ -13,21 +13,21 @@
 // limitations under the License.
 
 #[macro_use] extern crate rocket;
-
-#[get("/rust")]
-fn index() -> &'static str {
-    "This is a rust app!"
-}
+use rocket::Request;
 
 #[get("/")]
 fn hello() -> &'static str {
-    "Hello, world! This is a rust app."
+    "This is a rust web app."
 }
 
+#[catch(404)]
+fn not_found(_req: &Request) -> &'static str {
+    "This is a rust web app."
+}
 
 #[launch]
 fn rocket() -> _ {
     rocket::build()
-        .mount("/", routes![index])
         .mount("/", routes![hello])
+        .register("/", catchers![not_found])
 }

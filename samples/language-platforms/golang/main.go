@@ -23,8 +23,9 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/golang", func(response http.ResponseWriter, _ *http.Request) {
+	http.HandleFunc("/", func(response http.ResponseWriter, _ *http.Request) {
 		fmt.Fprintf(response, "This is a Go web app")
 	})
+	log.Println("listening on http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }

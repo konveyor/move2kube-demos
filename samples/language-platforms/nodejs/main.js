@@ -14,10 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-var serverObj = require('http');
-var PORT = 8080;
+const http = require('http');
+const PORT = 8080;
 
-serverObj.createServer(function (requestObj, responseObj) {
-	responseObj.write('<h1>This is a NodeJS web app</h1>');
-	responseObj.end();
-}).listen(PORT);
+http.createServer((req, res) => res.end('<h1>This is a NodeJS web app</h1>'))
+	.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));

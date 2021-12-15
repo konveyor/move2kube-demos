@@ -20,7 +20,7 @@ const Customers: React.FunctionComponent = () => {
 
   const history = useHistory();
 
-  // https://gateway.fedev.10.19.2.21.nip.io:32013/customers?page=0&size=3&sort=name
+  // https://gateway.fedev.nip.io:32013/customers?page=0&size=3&sort=name
 
   const getCustomers = () => fetch(`/customers-api/customers?page=${curPage}`, {
     // method: 'GET', // or 'PUT'

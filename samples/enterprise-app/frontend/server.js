@@ -11,7 +11,7 @@ app.use(cors({
 }));
 
 let customerApiProxyOptions = {
-  target: 'http://gateway.fedev.10.19.2.21.nip.io:30862',
+  target: 'http://gateway.fedev.nip.io:30862',
   changeOrigin: true,
   pathRewrite: {
     '^/customers-api': `/`,
@@ -23,7 +23,7 @@ let customerApiProxyOptions = {
 const customerApiProxy = createProxyMiddleware(customerApiProxyOptions);
 
 let orderApiProxyOptions = {
-  target: 'http://gateway.fedev.10.19.2.21.nip.io:30862',
+  target: 'http://gateway.fedev.nip.io:30862',
   changeOrigin: true,
   pathRewrite: {
     '^/orders-api': `/`,
@@ -47,7 +47,7 @@ let cropsApiProxyOptions = {
 const cropsApiProxy = createProxyMiddleware(cropsApiProxyOptions);
 
 let productApiProxyOptions = {
-  target: 'http://gateway.fedev.10.19.2.21.nip.io:30862',
+  target: 'http://gateway.fedev.nip.io:30862',
   changeOrigin: true,
   pathRewrite: {
     '^/products-api': `/`,

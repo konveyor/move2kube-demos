@@ -1,10 +1,99 @@
 apiVersion: move2kube.konveyor.io/v1alpha1
-kind: CfInstanceApps
+kind: CfApps
 spec:
   applications:
-    - name: move2kube-demo-cf
-      detectedBuildpack: sdk-for-nodejs
-      memory: 256
-      instances: 1
-      ports:
-        - 8080
+    - application:
+        guid: 92f3d3dd-fb21-448a-ae92-f32efeeada3b
+        createdat: "2021-11-24T08:01:11Z"
+        updatedat: "2021-11-24T08:04:32Z"
+        name: cfnodejsapp
+        memory: 256
+        instances: 1
+        diskquota: 1024
+        spaceguid: 74faba82-c6db-40af-9179-4f4c288efdde
+        stackguid: 317d85c3-9abf-470a-aa68-4e229d8d7b1c
+        state: STARTED
+        packagestate: STAGED
+        command: ""
+        buildpack: ""
+        detectedbuildpack: nodejs
+        detectedbuildpackguid: 7dfdebec-f05d-4f4e-9c1e-f5841cbae7dc
+        healthcheckhttpendpoint: ""
+        healthchecktype: port
+        healthchecktimeout: 0
+        diego: true
+        enablessh: true
+        detectedstartcommand: npm start
+        dockerimage: ""
+        dockercredentialsjson: {}
+        dockercredentials:
+          username: ""
+          password: ""
+        environment: {}
+        stagingfailedreason: ""
+        stagingfaileddescription: ""
+        ports:
+          - 8080
+        spaceurl: /v2/spaces/74faba82-c6db-40af-9179-4f4c288efdde
+        spacedata:
+          meta:
+            guid: 74faba82-c6db-40af-9179-4f4c288efdde
+            url: /v2/spaces/74faba82-c6db-40af-9179-4f4c288efdde
+            createdat: "2020-10-05T05:29:46Z"
+            updatedat: "2020-10-05T05:29:46Z"
+          entity:
+            guid: 74faba82-c6db-40af-9179-4f4c288efdde
+            createdat: ""
+            updatedat: ""
+            name: dev
+            organizationguid: 11387077-d81c-4340-852d-d02648a9e9d7
+            orgurl: /v2/organizations/11387077-d81c-4340-852d-d02648a9e9d7
+            orgdata:
+              meta:
+                guid: 11387077-d81c-4340-852d-d02648a9e9d7
+                url: /v2/organizations/11387077-d81c-4340-852d-d02648a9e9d7
+                createdat: "2020-10-05T05:29:31Z"
+                updatedat: "2020-10-05T05:29:31Z"
+              entity:
+                guid: 11387077-d81c-4340-852d-d02648a9e9d7
+                createdat: ""
+                updatedat: ""
+                name: irlhc4
+                status: active
+                quotadefinitionguid: ee8bf3cc-8776-4300-a490-b17552723c14
+                defaultisolationsegmentguid: ""
+            quotadefinitionguid: ""
+            isolationsegmentguid: ""
+            allowssh: true
+        packageupdatedat: "2021-11-24T08:03:51Z"
+      environment:
+        environment: {}
+        stagingenv:
+          BLUEMIX_REGION: ibm:yp:us-south
+        runningenv:
+          BLUEMIX_REGION: ibm:yp:us-south
+        systemenv:
+          VCAP_SERVICES: {}
+        applicationenv:
+          VCAP_APPLICATION:
+            application_id: 92f3d3dd-fb21-448a-ae92-f32efeeada3b
+            application_name: cfnodejsapp
+            application_uris:
+              - cfnodejsapp-quiet-topi-os.mybluemix.net
+            application_version: 62d24f28-2fc6-454e-b0c4-222e83a23f0a
+            cf_api: https://api.us-south.cf.cloud.ibm.com
+            limits:
+              disk: 1024
+              fds: 16384
+              mem: 256
+            name: cfnodejsapp
+            organization_id: 11387077-d81c-4340-852d-d02648a9e9d7
+            organization_name: irlhc4
+            process_id: 92f3d3dd-fb21-448a-ae92-f32efeeada3b
+            process_type: web
+            space_id: 74faba82-c6db-40af-9179-4f4c288efdde
+            space_name: dev
+            uris:
+              - cfnodejsapp-quiet-topi-os.mybluemix.net
+            users: null
+            version: 62d24f28-2fc6-454e-b0c4-222e83a23f0a

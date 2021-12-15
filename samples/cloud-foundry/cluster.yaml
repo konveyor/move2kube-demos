@@ -2,7 +2,7 @@ apiVersion: move2kube.konveyor.io/v1alpha1
 kind: ClusterMetadata
 metadata:
   name: |
-    default/c114-e-us-south-containers-cloud-ibm-com:32230/IAM#ashokponkumar@in.ibm.com
+    default/c114-e-us-south-containers:32230/IAM#username
 spec:
   storageClasses:
     - default

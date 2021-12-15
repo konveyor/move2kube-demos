@@ -1,29 +1,35 @@
 move2kube:
   minreplicas: "2"
   services:
-    frontend:
+    config-utils:
       "8080":
-        urlpath: frontend
+        urlpath: /config-utils
       enable: true
       port: "8080"
+    customers-tomcat:
+      "9080":
+        urlpath: /customers-tomcat
+      enable: true
+      wartransformer: Liberty
+    frontend:
+      "8080":
+        urlpath: /frontend
+      enable: true
     gateway:
       "8080":
-        urlpath: gateway
+        urlpath: /gateway
+      enable: true
+    inventory:
+      "8080":
+        urlpath: /inventory
       activemavenprofiles:
-        - local
-      activespringbootprofiles:
         - local
       enable: true
       port: "8080"
     orders:
       "8080":
-        urlpath: orders
-      activemavenprofiles:
-        - local
-      activespringbootprofiles:
-        - local
+        urlpath: /orders
       enable: true
-      port: "8080"
   target:
     clustertype: Kubernetes
     imageregistry:
@@ -35,39 +41,40 @@ move2kube:
       tls: ""
   transformers:
     types:
-      - EarRouter
-      - Jboss
-      - Tomcat
-      - CloudFoundry
-      - WinConsoleApp-Dockerfile
-      - Ruby-Dockerfile
-      - Rust-Dockerfile
-      - ComposeAnalyser
-      - Parameterizer
-      - Knative
-      - ComposeGenerator
-      - ContainerImagesBuildScriptGenerator
-      - DotNetCore-Dockerfile
-      - EarAnalyser
-      - Python-Dockerfile
-      - Tekton
-      - Golang-Dockerfile
       - ContainerImagesPushScriptGenerator
-      - WinWebApp-Dockerfile
-      - WarRouter
-      - Liberty
-      - Kubernetes
-      - Gradle
-      - ReadMeGenerator
-      - Maven
-      - DockerfileParser
-      - Jar
       - DockerfileDetector
-      - EurekaReplaceEngine
+      - DotNetCore-Dockerfile
       - Nodejs-Dockerfile
+      - WinConsoleApp-Dockerfile
       - WinSLWebApp-Dockerfile
-      - WarAnalyser
-      - ZuulAnalyser
       - PHP-Dockerfile
+      - Tomcat
+      - Jar
+      - Kubernetes
+      - Ruby-Dockerfile
+      - ZuulAnalyser
+      - CloudFoundry
+      - ClusterSelector
+      - ComposeAnalyser
+      - EarAnalyser
+      - Gradle
+      - Jboss
+      - Liberty
+      - Parameterizer
+      - ReadMeGenerator
+      - Tekton
+      - WinWebApp-Dockerfile
+      - DockerfileParser
+      - WarRouter
       - Buildconfig
+      - ContainerImagesBuildScriptGenerator
       - DockerfileImageBuildScript
+      - EarRouter
+      - Golang-Dockerfile
+      - WarAnalyser
+      - ComposeGenerator
+      - EurekaReplaceEngine
+      - Knative
+      - Maven
+      - Python-Dockerfile
+      - Rust-Dockerfile

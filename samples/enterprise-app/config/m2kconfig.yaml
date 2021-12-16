@@ -1,0 +1,80 @@
+move2kube:
+  minreplicas: "2"
+  services:
+    config-utils:
+      "8080":
+        urlpath: /config-utils
+      enable: true
+      port: "8080"
+    customers-tomcat:
+      "9080":
+        urlpath: /customers-tomcat
+      enable: true
+      wartransformer: Liberty
+    frontend:
+      "8080":
+        urlpath: /frontend
+      enable: true
+    gateway:
+      "8080":
+        urlpath: /gateway
+      enable: true
+    inventory:
+      "8080":
+        urlpath: /inventory
+      activemavenprofiles:
+        - local
+      enable: true
+      port: "8080"
+    orders:
+      "8080":
+        urlpath: /orders
+      enable: true
+  target:
+    clustertype: Kubernetes
+    imageregistry:
+      logintype: No authentication
+      namespace: move2kube
+      url: quay.io
+    ingress:
+      host: localhost
+      tls: ""
+  transformers:
+    types:
+      - ContainerImagesPushScriptGenerator
+      - DockerfileDetector
+      - DotNetCore-Dockerfile
+      - Nodejs-Dockerfile
+      - WinConsoleApp-Dockerfile
+      - WinSLWebApp-Dockerfile
+      - PHP-Dockerfile
+      - Tomcat
+      - Jar
+      - Kubernetes
+      - Ruby-Dockerfile
+      - ZuulAnalyser
+      - CloudFoundry
+      - ClusterSelector
+      - ComposeAnalyser
+      - EarAnalyser
+      - Gradle
+      - Jboss
+      - Liberty
+      - Parameterizer
+      - ReadMeGenerator
+      - Tekton
+      - WinWebApp-Dockerfile
+      - DockerfileParser
+      - WarRouter
+      - Buildconfig
+      - ContainerImagesBuildScriptGenerator
+      - DockerfileImageBuildScript
+      - EarRouter
+      - Golang-Dockerfile
+      - WarAnalyser
+      - ComposeGenerator
+      - EurekaReplaceEngine
+      - Knative
+      - Maven
+      - Python-Dockerfile
+      - Rust-Dockerfile

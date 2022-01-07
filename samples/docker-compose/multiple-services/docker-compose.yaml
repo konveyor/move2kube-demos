@@ -18,4 +18,4 @@ services:
         ports:
             - "8080:80"
         environment:
-            - API_URL=http://api:1234/fib
+            - API_URL=http://api:1234/api

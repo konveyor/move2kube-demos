@@ -73,7 +73,7 @@ spec:
         runningenv:
           BLUEMIX_REGION: region
         systemenv:
-          VCAP_SERVICES: {}
+          VCAP_SERVICES: ""
         applicationenv:
           VCAP_APPLICATION:
             application_id: id1
@@ -168,7 +168,7 @@ spec:
         runningenv:
           BLUEMIX_REGION: region
         systemenv:
-          VCAP_SERVICES: {}
+          VCAP_SERVICES: ""
         applicationenv:
           VCAP_APPLICATION:
             application_id: id2
@@ -263,7 +263,7 @@ spec:
         runningenv:
           BLUEMIX_REGION: region
         systemenv:
-          VCAP_SERVICES: {}
+          VCAP_SERVICES: ""
         applicationenv:
           VCAP_APPLICATION:
             application_id: id3

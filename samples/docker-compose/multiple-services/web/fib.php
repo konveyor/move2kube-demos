@@ -8,9 +8,9 @@
 <body>
     <h1>Answer</h1>
     <p><?php
-        $api_url = "http://api:1234/fib?n=";
+        $api_url = "http://api:1234/api/fib?n=";
         $new_url = getenv("API_URL");
-        if ($new_url) $api_url = $new_url . "?n=";
+        if ($new_url) $api_url = $new_url . "/fib?n=";
 
         $n = $_GET["n"];
         if (ctype_digit($n)) {

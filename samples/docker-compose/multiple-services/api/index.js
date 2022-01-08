@@ -2,7 +2,7 @@ import url from 'url';
 import http from 'http';
 import redis from "redis"
 
-const api_endpoint = '/fib';
+const api_endpoint = '/api/fib';
 const usage_instructions = `usage: ${api_endpoint}?n=<your number>\n`;
 const client = 'REDIS_URL' in process.env ? redis.createClient(process.env.REDIS_URL) : redis.createClient();
 client.on("error", err => console.error(err));
@@ -30,6 +30,8 @@ function requestHandler(req, res) {
                 else console.error("failed to cache the answer for n. error:", err)
             });
         } else {
+            // ans returned by redis is a string
+            ans = parseInt(ans, 10);
             console.log(`CACHE HIT for n = ${n} ans is ${ans}`);
         }
         res.writeHead(200, { "Content-Type": "application/json" });

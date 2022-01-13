@@ -30,7 +30,7 @@ spec:
           username: ""
           password: ""
         environment:
-          TEST_ENV: '{`''"''}'
+          TEST_ENV: 'test-env-value'
         stagingfailedreason: ""
         stagingfaileddescription: ""
         ports:
@@ -69,7 +69,7 @@ spec:
         packageupdatedat: "2021-11-24T08:03:51Z"
       environment:
         environment:
-          TEST_ENV: '{`''"''}'
+          TEST_ENV: 'test-env-value'
         stagingenv:
           BLUEMIX_REGION: ibm:yp:us-south
         runningenv:

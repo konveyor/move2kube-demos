@@ -2,29 +2,10 @@ apiVersion: move2kube.konveyor.io/v1alpha1
 kind: ClusterMetadata
 metadata:
   name: |
-    default/c114-e-us-south-containers-cloud-ibm-com:32230/IAM#ashokponkumar@in.ibm.com
+    default/c114-e-us-south-containers:32230/IAM#username
 spec:
   storageClasses:
     - default
-    - ibmc-block-bronze
-    - ibmc-block-custom
-    - ibmc-block-gold
-    - ibmc-block-retain-bronze
-    - ibmc-block-retain-custom
-    - ibmc-block-retain-gold
-    - ibmc-block-retain-silver
-    - ibmc-block-silver
-    - ibmc-file-bronze
-    - ibmc-file-bronze-gid
-    - ibmc-file-custom
-    - ibmc-file-gold
-    - ibmc-file-gold-gid
-    - ibmc-file-retain-bronze
-    - ibmc-file-retain-custom
-    - ibmc-file-retain-gold
-    - ibmc-file-retain-silver
-    - ibmc-file-silver
-    - ibmc-file-silver-gid
   apiKindVersionMap:
     APIServer:
       - config.openshift.io/v1

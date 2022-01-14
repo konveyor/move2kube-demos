@@ -71,9 +71,9 @@ spec:
         environment:
           TEST_ENV: 'test-env-value'
         stagingenv:
-          BLUEMIX_REGION: ibm:yp:us-south
+          BLUEMIX_REGION: region
         runningenv:
-          BLUEMIX_REGION: ibm:yp:us-south
+          BLUEMIX_REGION: region
         systemenv:
           VCAP_SERVICES: '{}'
         applicationenv:

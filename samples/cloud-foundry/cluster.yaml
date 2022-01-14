@@ -6,25 +6,6 @@ metadata:
 spec:
   storageClasses:
     - default
-    - ibmc-block-bronze
-    - ibmc-block-custom
-    - ibmc-block-gold
-    - ibmc-block-retain-bronze
-    - ibmc-block-retain-custom
-    - ibmc-block-retain-gold
-    - ibmc-block-retain-silver
-    - ibmc-block-silver
-    - ibmc-file-bronze
-    - ibmc-file-bronze-gid
-    - ibmc-file-custom
-    - ibmc-file-gold
-    - ibmc-file-gold-gid
-    - ibmc-file-retain-bronze
-    - ibmc-file-retain-custom
-    - ibmc-file-retain-gold
-    - ibmc-file-retain-silver
-    - ibmc-file-silver
-    - ibmc-file-silver-gid
   apiKindVersionMap:
     APIServer:
       - config.openshift.io/v1

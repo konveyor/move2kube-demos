@@ -1,10 +1,80 @@
 apiVersion: move2kube.konveyor.io/v1alpha1
-kind: CfInstanceApps
+kind: CfApps
 spec:
   applications:
-    - name: move2kube-demo-cf
-      detectedBuildpack: sdk-for-nodejs
-      memory: 256
-      instances: 1
-      ports:
-        - 8080
+    - application:
+        guid: id
+        createdat: "2021-11-24T08:01:11Z"
+        updatedat: "2022-01-03T16:15:48Z"
+        name: cfnodejsapp
+        memory: 256
+        instances: 1
+        diskquota: 1024
+        spaceguid: id
+        stackguid: stack-id
+        state: STARTED
+        packagestate: STAGED
+        command: ""
+        buildpack: ""
+        detectedbuildpack: nodejs
+        detectedbuildpackguid: buildpack-guid
+        healthcheckhttpendpoint: ""
+        healthchecktype: port
+        healthchecktimeout: 0
+        diego: true
+        enablessh: true
+        detectedstartcommand: npm start
+        dockerimage: ""
+        dockercredentialsjson: {}
+        dockercredentials:
+          username: ""
+          password: ""
+        environment:
+          TEST_ENV: 'test-env-value'
+        stagingfailedreason: ""
+        stagingfaileddescription: ""
+        ports:
+          - 8080
+        spaceurl: /v2/spaces/id
+        spacedata:
+          meta:
+            guid: id
+            url: /v2/spaces/id
+            createdat: "2020-10-05T05:29:46Z"
+            updatedat: "2020-10-05T05:29:46Z"
+          entity:
+            guid: id
+            createdat: ""
+            updatedat: ""
+            name: dev
+            organizationguid: org-id
+            orgurl: /v2/organizations/org-id
+            orgdata:
+              meta:
+                guid: org-id
+                url: /v2/organizations/org-id
+                createdat: "2020-10-05T05:29:31Z"
+                updatedat: "2020-10-05T05:29:31Z"
+              entity:
+                guid: org-id
+                createdat: ""
+                updatedat: ""
+                name: orgname
+                status: active
+                quotadefinitionguid: equota-id
+                defaultisolationsegmentguid: ""
+            quotadefinitionguid: ""
+            isolationsegmentguid: ""
+            allowssh: true
+        packageupdatedat: "2021-11-24T08:03:51Z"
+      environment:
+        environment:
+          TEST_ENV: 'test-env-value'
+        stagingenv:
+          BLUEMIX_REGION: region
+        runningenv:
+          BLUEMIX_REGION: region
+        systemenv:
+          VCAP_SERVICES: '{}'
+        applicationenv:
+          VCAP_APPLICATION: '{"application_id":"app-id","application_name":"cfnodejsapp","application_uris":["pp-url"],"application_version":"app-version","cf_api":"https://api.region.cf.com","limits":{"disk":1024,"fds":16384,"mem":256},"name":"cfnodejsapp","organization_id":"org-id","organization_name":"org-name","process_id":"pid","process_type":"web","space_id":"space-id","space_name":"dev","uris":["app-url"],"users":null,"version":"ver"}'

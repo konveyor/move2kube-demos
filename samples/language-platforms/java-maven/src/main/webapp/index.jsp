@@ -16,7 +16,9 @@ limitations under the License.
 -->
 
 <html>
+
 <body>
-<h1>This is a java-maven web app</h1>
+	<h1>This is a Java Maven web app</h1>
 </body>
+
 </html>

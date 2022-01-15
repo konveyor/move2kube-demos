@@ -1,7 +1,0 @@
----
-applications:
-    -
-        name: cfnodejsapp
-        random-route: true
-        memory: 256M
-...

@@ -7,12 +7,11 @@ This repository contains the different components used to showcase the different
 The demo includes the following services:
 
 - **Customers**: The original Retail application from which the rest of microservices have been carved out. It still retains the business logic related to customer management. This legacy application runs on Tomcat and uses an Oracle database.
-- **Inventory**: Stores detailed information about products. Developed using Quarkus and PostgreSQL as data store. This service has been configured with the the JDK build mode for Quarkus by default.
 - **Orders**: Manages all order related entities. It stores only UIDs to refer to Products and Customers. Implemented with Spring Boot and using a PostgreSQL database.
 - **Gateway**: Access and aggregation layer for the whole application. It gets orders data and aggregates Products and Customers detailed information. Also implemented with the Spring Boot/PostgreSQL stack.
 - **Frontend**: A new front end layer developed with the React flavor of Patternfly, published on Nginx.
 
-![Architecture Screenshot](docs/images/architecture.png?raw=true "Architecture Diagram")
+![Architecture Screenshot](docs/images/architecture.jpg?raw=true "Architecture Diagram")
 
 It can be argued that the domain is too fine grained for the modeled business, or that the approach is not optimal for data aggregation. While these statements might be true, the focus on the demo was to present a simple case with microservices interacting with each other, and shouldn't be considered a design aimed for a production solution.
 

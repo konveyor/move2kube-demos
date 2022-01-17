@@ -19,13 +19,6 @@ move2kube:
       "8080":
         urlpath: /gateway
       enable: true
-    inventory:
-      "8080":
-        urlpath: /inventory
-      activemavenprofiles:
-        - local
-      enable: true
-      port: "8080"
     orders:
       "8080":
         urlpath: /orders

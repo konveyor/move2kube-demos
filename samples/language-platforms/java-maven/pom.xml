@@ -31,7 +31,7 @@ limitations under the License.
 
   <packaging>war</packaging>
   <build>
-    <finalName>ROOT</finalName>
+    <finalName>java-maven</finalName>
     <pluginManagement>
       <plugins>
         <plugin>

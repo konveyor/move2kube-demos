@@ -6,9 +6,9 @@ move2kube:
         urlpath: /config-utils
       enable: true
       port: "8080"
-    customers-tomcat:
+    customers:
       "9080":
-        urlpath: /customers-tomcat
+        urlpath: /customers
       enable: true
       wartransformer: Liberty
     frontend:

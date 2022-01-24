@@ -1,7 +1,7 @@
 # These can be overidden with environment variables of the same name
 REGISTRY ?= quay.io
-REPOSITORY ?= rofrano
-IMAGE ?= customers-tomcat
+REPOSITORY ?= konveyor
+IMAGE ?= customers
 TAG ?= 0.1
 LOCAL_IMAGE_NAME ?= $(IMAGE):$(TAG)
 REMOTE_IMAGE_NAME ?= $(REGISTRY)/$(REPOSITORY)/$(IMAGE):$(TAG)

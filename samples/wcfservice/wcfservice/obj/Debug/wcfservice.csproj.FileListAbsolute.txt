@@ -1,0 +1,6 @@
+c:\users\seshapad_in.ibm.com\documents\visual studio 2015\Projects\wcfservice\wcfservice\bin\Debug\wcfservice.exe.config
+c:\users\seshapad_in.ibm.com\documents\visual studio 2015\Projects\wcfservice\wcfservice\bin\Debug\wcfservice.exe
+c:\users\seshapad_in.ibm.com\documents\visual studio 2015\Projects\wcfservice\wcfservice\bin\Debug\wcfservice.pdb
+c:\users\seshapad_in.ibm.com\documents\visual studio 2015\Projects\wcfservice\wcfservice\obj\Debug\wcfservice.csprojResolveAssemblyReference.cache
+c:\users\seshapad_in.ibm.com\documents\visual studio 2015\Projects\wcfservice\wcfservice\obj\Debug\wcfservice.exe
+c:\users\seshapad_in.ibm.com\documents\visual studio 2015\Projects\wcfservice\wcfservice\obj\Debug\wcfservice.pdb

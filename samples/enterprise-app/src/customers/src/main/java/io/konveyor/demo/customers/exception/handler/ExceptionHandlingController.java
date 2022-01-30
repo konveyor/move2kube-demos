@@ -1,12 +1,13 @@
-package io.konveyor.demo.ordermanagement.exception.handler;
+package io.konveyor.demo.customers.exception.handler;
 
 
 import org.jboss.logging.Logger;
-import io.konveyor.demo.ordermanagement.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import io.konveyor.demo.customers.exception.ResourceNotFoundException;
 
 @ControllerAdvice
 public class ExceptionHandlingController {

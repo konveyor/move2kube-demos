@@ -1,14 +1,15 @@
-package io.konveyor.demo.ordermanagement.service;
+package io.konveyor.demo.customers.service;
 
 
 import org.jboss.logging.Logger;
-import io.konveyor.demo.ordermanagement.model.Customer;
-import io.konveyor.demo.ordermanagement.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import io.konveyor.demo.customers.model.Customer;
+import io.konveyor.demo.customers.repository.CustomerRepository;
 
 @Service
 @Transactional

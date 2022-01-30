@@ -1,7 +1,8 @@
-package io.konveyor.demo.ordermanagement.repository;
+package io.konveyor.demo.customers.repository;
 
-import io.konveyor.demo.ordermanagement.model.Customer;
 import org.springframework.data.repository.PagingAndSortingRepository;
+
+import io.konveyor.demo.customers.model.Customer;
 
 public interface CustomerRepository extends PagingAndSortingRepository<Customer, Long> {
 

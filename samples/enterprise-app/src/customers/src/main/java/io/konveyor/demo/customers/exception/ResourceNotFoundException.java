@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.konveyor.demo.ordermanagement.exception;
+package io.konveyor.demo.customers.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
 

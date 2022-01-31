@@ -4,13 +4,7 @@
 
 # Move2Kube - Demos
 
-This repository contains data related to tutorials in https://move2kube.konveyor.io/docs/tutorial related to [Move2Kube](https://github.com/konveyor/move2kube).
-
-## To bring up the UI
-
-1. Change directory to an empty directory using say, `mkdir -p workspace && cd workspace`
-1. Run `docker run -p 8080:8080 -v $PWD:/workspace -v /var/run/docker.sock:/var/run/docker.sock -it quay.io/konveyor/move2kube-aio:v0.2.0-alpha.4`
-1. Access the UI in http://localhost:8080/.
+This repository contains samples to try out with Konveyor Move2Kube. Instructions on how to use Move2Kube with many of these samples are also found in the tutorials https://move2kube.konveyor.io/tutorials.
 
 ## Discussion
 

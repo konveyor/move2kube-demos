@@ -1,9 +1,6 @@
-package io.konveyor.demo.ordermanagement.controller;
+package io.konveyor.demo.customers.controller;
 
 import org.jboss.logging.Logger;
-import io.konveyor.demo.ordermanagement.exception.ResourceNotFoundException;
-import io.konveyor.demo.ordermanagement.model.Customer;
-import io.konveyor.demo.ordermanagement.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.konveyor.demo.customers.exception.ResourceNotFoundException;
+import io.konveyor.demo.customers.model.Customer;
+import io.konveyor.demo.customers.service.CustomerService;
 
 @RestController
 @RequestMapping("/customers")

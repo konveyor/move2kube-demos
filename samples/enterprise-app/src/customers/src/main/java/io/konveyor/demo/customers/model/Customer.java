@@ -1,4 +1,4 @@
-package io.konveyor.demo.ordermanagement.model;
+package io.konveyor.demo.customers.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

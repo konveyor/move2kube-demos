@@ -58,7 +58,7 @@ spec:
                 guid: org-id1
                 createdat: ""
                 updatedat: ""
-                name: org
+                name: org-name
                 status: active
                 quotadefinitionguid: quota-id
                 defaultisolationsegmentguid: ""
@@ -73,30 +73,9 @@ spec:
         runningenv:
           BLUEMIX_REGION: region
         systemenv:
-          VCAP_SERVICES: ""
+          VCAP_SERVICES: '{}'
         applicationenv:
-          VCAP_APPLICATION:
-            application_id: id1
-            application_name: orders
-            application_uris:
-              - orders-proud-bilby-rf.net
-            application_version: app-ver1
-            cf_api: api-url
-            limits:
-              disk: 1024
-              fds: 16384
-              mem: 1024
-            name: orders
-            organization_id: org-id1
-            organization_name: org
-            process_id: id1
-            process_type: web
-            space_id: space-id1
-            space_name: dev
-            uris:
-              - orders-proud-bilby-rf.net
-            users: null
-            version: app-ver1
+          VCAP_APPLICATION: '{"application_id":"id1","application_name":"orders","application_uris":["orders-proud-bilby-rf.net"],"application_version":"app-ver1","cf_api":"app-url","limits":{"disk":1024,"fds":16384,"mem":1024},"name":"orders","organization_id":"org-id1","organization_name":"org-name","process_id":"id1","process_type":"web","space_id":"space-id1","space_name":"dev","uris":["orders-proud-bilby-rf.net"],"users":null,"version":"app-ver1"}'
     - application:
         guid: id2
         createdat: "2021-12-14T10:04:00Z"
@@ -153,7 +132,7 @@ spec:
                 guid: org-id1
                 createdat: ""
                 updatedat: ""
-                name: org
+                name: org-name
                 status: active
                 quotadefinitionguid: quota-id
                 defaultisolationsegmentguid: ""
@@ -168,30 +147,9 @@ spec:
         runningenv:
           BLUEMIX_REGION: region
         systemenv:
-          VCAP_SERVICES: ""
+          VCAP_SERVICES: '{}'
         applicationenv:
-          VCAP_APPLICATION:
-            application_id: id2
-            application_name: gateway
-            application_uris:
-              - gateway-restless-fossa-ws.net
-            application_version: app-ver2
-            cf_api: api-url
-            limits:
-              disk: 1024
-              fds: 16384
-              mem: 1024
-            name: gateway
-            organization_id: org-id1
-            organization_name: org
-            process_id: id2
-            process_type: web
-            space_id: space-id1
-            space_name: dev
-            uris:
-              - gateway-restless-fossa-ws.net
-            users: null
-            version: app-ver2
+          VCAP_APPLICATION: '{"application_id":"id2","application_name":"gateway","application_uris":["gateway-restless-fossa-ws.net"],"application_version":"app-ver2","cf_api":"app-url","limits":{"disk":1024,"fds":16384,"mem":1024},"name":"gateway","organization_id":"org-id1","organization_name":"org-name","process_id":"id2","process_type":"web","space_id":"space-id1","space_name":"dev","uris":["gateway-restless-fossa-ws.net"],"users":null,"version":"app-ver2"}'
     - application:
         guid: id3
         createdat: "2021-12-14T14:54:25Z"
@@ -248,7 +206,7 @@ spec:
                 guid: org-id1
                 createdat: ""
                 updatedat: ""
-                name: org
+                name: org-name
                 status: active
                 quotadefinitionguid: quota-id
                 defaultisolationsegmentguid: ""
@@ -263,27 +221,6 @@ spec:
         runningenv:
           BLUEMIX_REGION: region
         systemenv:
-          VCAP_SERVICES: ""
+          VCAP_SERVICES: '{}'
         applicationenv:
-          VCAP_APPLICATION:
-            application_id: id3
-            application_name: frontend
-            application_uris:
-              - frontend-patient-oryx-mc.net
-            application_version: app-ver3
-            cf_api: api-url
-            limits:
-              disk: 1024
-              fds: 16384
-              mem: 1024
-            name: frontend
-            organization_id: org-id1
-            organization_name: org
-            process_id: id3
-            process_type: web
-            space_id: space-id1
-            space_name: dev
-            uris:
-              - frontend-patient-oryx-mc.net
-            users: null
-            version: app-ver3
+          VCAP_APPLICATION: '{"application_id":"id3","application_name":"frontend","application_uris":["frontend-patient-oryx-mc.net"],"application_version":"app-ver3","cf_api":"app-url","limits":{"disk":1024,"fds":16384,"mem":1024},"name":"frontend","organization_id":"org-id1","organization_name":"org-name","process_id":"id3","process_type":"web","space_id":"space-id1","space_name":"dev","uris":["frontend-patient-oryx-mc.net"],"users":null,"version":"app-ver3"}'

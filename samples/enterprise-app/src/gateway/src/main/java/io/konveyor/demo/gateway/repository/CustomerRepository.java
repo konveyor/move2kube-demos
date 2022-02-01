@@ -65,16 +65,16 @@ public class CustomerRepository extends GenericRepository{
 				.queryParam("page", pageable.getPageNumber())
 				.queryParam("size", pageable.getPageSize())
 				.queryParam("sort", getSortString(pageable));
-		ResponseEntity<List<Customer>> responseEntity = 
+		ResponseEntity<RestResponsePage<Customer>> responseEntity = 
 				  restTemplate.exchange(
 						  builder.toUriString(),
 						  HttpMethod.GET,
 						  null,
-						  new ParameterizedTypeReference<List<Customer>>() {}
+						  new ParameterizedTypeReference<RestResponsePage<Customer>>() {}
 				  );
-		List<Customer> customers = responseEntity.getBody();
+		RestResponsePage<Customer> customers = responseEntity.getBody();
 		span.finish();
-		return customers;
+		return customers.toList();
 	}
 	
 	public Customer getFallbackCustomer(Long id, Throwable e) {

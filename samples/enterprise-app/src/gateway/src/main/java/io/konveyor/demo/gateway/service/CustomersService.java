@@ -27,9 +27,9 @@ public class CustomersService {
 	public Page<Customer> findAll(Pageable pageable) {
 		Span span = tracer.buildSpan("findAll").start();
 		log.debug("Entering OrdersService.findAll()");
-		List<Customer> orders = customerRepository.findAll(pageable);
+		List<Customer> customers = customerRepository.findAll(pageable);
 		span.finish();
-		return new PageImpl<Customer>(orders, pageable, orders.size());
+		return new PageImpl<Customer>(customers, pageable, customers.size());
 	}
 
 	public Customer getById(Long id) {

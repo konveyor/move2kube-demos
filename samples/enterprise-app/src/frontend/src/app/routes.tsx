@@ -60,20 +60,20 @@ const routes: AppRouteConfig[] = [
     path: '/orders/detail/:id',
     title: 'React App | Order resource detail page',
   },
-  {
-    component: Products,
-    exact: true,
-    label: 'Products',
-    path: '/products',
-    title: 'React App | Products resource list',
-  },
-  {
-    component: ProductDetail,
-    exact: true,
-    isAsync: true,
-    path: '/products/detail/:slug',
-    title: 'React App | Products resource detail page',
-  },
+  // {
+  //   component: Products,
+  //   exact: true,
+  //   label: 'Products',
+  //   path: '/products',
+  //   title: 'React App | Products resource list',
+  // },
+  // {
+  //   component: ProductDetail,
+  //   exact: true,
+  //   isAsync: true,
+  //   path: '/products/detail/:slug',
+  //   title: 'React App | Products resource detail page',
+  // },
 ];
 
 // a custom hook for sending focus to the primary content container

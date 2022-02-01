@@ -63,16 +63,16 @@ public class OrderRepository extends GenericRepository {
 				.queryParam("page", pageable.getPageNumber())
 				.queryParam("size", pageable.getPageSize())
 				.queryParam("sort", getSortString(pageable));
-		ResponseEntity<List<Order>> responseEntity = 
+		ResponseEntity<RestResponsePage<Order>> responseEntity = 
 				  restTemplate.exchange(
 						  builder.toUriString(),
 						  HttpMethod.GET,
 						  null,
-						  new ParameterizedTypeReference<List<Order>>() {}
+						  new ParameterizedTypeReference<RestResponsePage<Order>>() {}
 				  );
-		List<Order> orders = responseEntity.getBody();
+		RestResponsePage<Order> orders = responseEntity.getBody();
 		span.finish();
-		return orders;
+		return orders.toList();
 	}
 	
 

@@ -1,11 +1,10 @@
 package io.konveyor.demo.orders.controller;
 
-import java.util.List;
-
 import io.konveyor.demo.orders.exception.ResourceNotFoundException;
 import io.konveyor.demo.orders.model.Order;
 import io.konveyor.demo.orders.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +26,7 @@ public class OrderController {
 	
 	@Autowired
 	Tracer tracer;
-	
+
 	
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Order getById(@PathVariable("id") Long id) {
@@ -47,8 +46,8 @@ public class OrderController {
 	}
 	
 	@RequestMapping
-	public List<Order> findAll(Pageable pageable){
-		return orderService.findAll(pageable).toList();
+	public Page<Order> findAll(Pageable pageable){
+		return orderService.findAll(pageable);
 	}
 
 }

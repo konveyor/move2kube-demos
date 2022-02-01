@@ -26,10 +26,11 @@ const Orders: React.FunctionComponent = () => {
 
   React.useEffect(() => {
     getOrders()
-      .then((result) => result.json())
-      .then(data => {
-        setHasData(data);
+      .then((result) => {
+        if (result.ok) return result.json();
+        throw new Error(`failed to fetch order data for page ${curPage}`);
       })
+      .then(data => setHasData(data))
       .catch(error => {
         console.log('Error', error);
       })

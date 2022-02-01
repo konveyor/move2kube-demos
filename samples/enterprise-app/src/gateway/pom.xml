@@ -1,19 +1,19 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<groupId>dev.snowdrop</groupId>
 		<artifactId>snowdrop-dependencies</artifactId>
 		<version>2.2.6.SP1-redhat-00001</version>
 	</parent>
-	
+
 	<groupId>io.konveyor.demo</groupId>
 	<artifactId>gateway</artifactId>
 	<version>2.0.0-SNAPSHOT</version>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<arquillian.version>1.4.0.Final</arquillian.version>
@@ -76,9 +76,12 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<version>1.18.22</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.opentracing.contrib</groupId>
@@ -104,6 +107,12 @@
 			<groupId>io.rest-assured</groupId>
 			<artifactId>rest-assured</artifactId>
 			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>com.sun.xml.bind</groupId>
+					<artifactId>jaxb-osgi</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.awaitility</groupId>
@@ -166,8 +175,7 @@
 		<profile>
 			<id>local</id>
 			<activation />
-			<dependencies>
-			</dependencies>
+			<dependencies></dependencies>
 		</profile>
 		<profile>
 			<id>openshift</id>
@@ -179,8 +187,8 @@
 				</dependency>
 			</dependencies>
 			<activation>
-        		<activeByDefault>true</activeByDefault>
-    		</activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 		</profile>
 		<profile>
 			<id>openshift-manual</id>
@@ -191,7 +199,7 @@
 					<scope>runtime</scope>
 				</dependency>
 			</dependencies>
-    		<activation />
+			<activation />
 			<build>
 				<plugins>
 					<plugin>

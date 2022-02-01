@@ -38,7 +38,7 @@ public class OrdersService {
 		Order o = orderRepository.getOrderById(id);
 		if (o != null) {
 			o.setCustomer(customerRepository.getCustomerById(o.getCustomer().getId()));
-			o.setItems(inventoryRepository.getProductDetails(o.getItems()));
+			// o.setItems(inventoryRepository.getProductDetails(o.getItems()));
 		}
 		span.finish();
 		return o;
@@ -50,7 +50,7 @@ public class OrdersService {
 		List<Order> orders = orderRepository.findAll(pageable);
 		for (Order o : orders) {
 			o.setCustomer(customerRepository.getCustomerById(o.getCustomer().getId()));
-			o.setItems(inventoryRepository.getProductDetails(o.getItems()));
+			// o.setItems(inventoryRepository.getProductDetails(o.getItems()));
 		}
 		span.finish();
 		return new PageImpl<Order>(orders, pageable, orders.size());

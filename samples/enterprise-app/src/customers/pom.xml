@@ -158,17 +158,26 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>2.6.3</version>
-				<configuration>
-					<profiles>
-						<profile>local</profile>
-					</profiles>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
 	<profiles>
 		<profile>
 			<id>local</id>
+			<dependencies>
+				<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+				<dependency>
+					<groupId>com.h2database</groupId>
+					<artifactId>h2</artifactId>
+					<version>2.1.210</version>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>cloudfoundry</id>
+			<build>
+				<finalName>ROOT</finalName>
+			</build>
 			<dependencies>
 				<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
 				<dependency>

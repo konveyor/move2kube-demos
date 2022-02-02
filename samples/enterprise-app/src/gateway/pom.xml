@@ -2,9 +2,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>dev.snowdrop</groupId>
-		<artifactId>snowdrop-dependencies</artifactId>
-		<version>2.2.6.SP1-redhat-00001</version>
+    	<groupId>org.springframework.boot</groupId>
+    	<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.2.6.RELEASE</version>
 	</parent>
 
 	<groupId>io.konveyor.demo</groupId>
@@ -54,6 +54,7 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-kubernetes-config</artifactId>
+		    <version>1.1.10.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -86,6 +87,7 @@
 		<dependency>
 			<groupId>io.opentracing.contrib</groupId>
 			<artifactId>opentracing-spring-jaeger-web-starter</artifactId>
+			<version>3.3.1</version>
 		</dependency>
 		<dependency>
 			<groupId>io.opentracing.contrib</groupId>
@@ -131,50 +133,21 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<profiles>
-						<profile>local</profile>
-					</profiles>
-					<classifier>exec</classifier>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
-	<repositories>
-		<repository>
-			<id>redhat-early-access</id>
-			<name>Red Hat Early Access Repository</name>
-			<url>https://maven.repository.redhat.com/earlyaccess/all/</url>
-		</repository>
-		<repository>
-			<id>redhat-ga</id>
-			<name>Red Hat GA Repository</name>
-			<url>https://maven.repository.redhat.com/ga/</url>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>redhat-early-access</id>
-			<name>Red Hat Early Access Repository</name>
-			<url>https://maven.repository.redhat.com/earlyaccess/all/</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>redhat-ga</id>
-			<name>Red Hat GA Repository</name>
-			<url>https://maven.repository.redhat.com/ga/</url>
-		</pluginRepository>
-	</pluginRepositories>
 	<profiles>
 		<profile>
 			<id>local</id>
 			<activation />
+			<dependencies></dependencies>
+		</profile>
+		<profile>
+			<id>cloudfoundry</id>
+			<activation />
+			<build>
+				<finalName>ROOT</finalName>
+			</build>
 			<dependencies></dependencies>
 		</profile>
 		<profile>

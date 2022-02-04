@@ -10,7 +10,17 @@ There are 2 endpoints:
 ## Usage
 
 ```
-$ ./mvnw clean spring-boot:run -P local
+$ SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean spring-boot:run -P dev-inmemorydb
 ```
 
 Browse to http://localhost:8080/customers
+
+### Run the war file in a container
+
+```
+$ docker run --rm -it \
+    -p 8080:8080 \
+    -e SPRING_PROFILES_ACTIVE=dev-inmemorydb \
+    -v "$PWD/target/ROOT.war:/usr/local/tomcat/webapps-javaee/ROOT.war" \
+    tomcat
+```

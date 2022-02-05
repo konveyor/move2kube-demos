@@ -30,10 +30,7 @@ const Products: React.FunctionComponent = () => {
   React.useEffect(() => {
     getProducts()
       .then(result => result.json())
-      .then(data => {
-        console.log('product data', data)
-        setProductsData(data);
-      });
+      .then(data => setProductsData(data));
 
   }, [curPage]);
 

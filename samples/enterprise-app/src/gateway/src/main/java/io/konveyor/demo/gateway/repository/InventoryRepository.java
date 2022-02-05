@@ -79,16 +79,16 @@ public class InventoryRepository extends GenericRepository{
 				.queryParam("page", pageable.getPageNumber())
 				.queryParam("size", pageable.getPageSize())
 				.queryParam("sort", getSortString(pageable));
-		ResponseEntity<List<Product>> responseEntity = 
+		ResponseEntity<RestResponsePage<Product>> responseEntity = 
 				  restTemplate.exchange(
 						  builder.toUriString(),
 						  HttpMethod.GET,
 						  null,
-						  new ParameterizedTypeReference<List<Product>>() {}
+						  new ParameterizedTypeReference<RestResponsePage<Product>>() {}
 				  );
-		List<Product> orders = responseEntity.getBody();
+		RestResponsePage<Product> products = responseEntity.getBody();
 		span.finish();
-		return orders;
+		return products.toList();
 	}
 	
 	@HystrixCommand(commandKey = "Products", fallbackMethod = "getFallbackProduct", commandProperties = {

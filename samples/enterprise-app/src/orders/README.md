@@ -12,7 +12,7 @@ There are 2 endpoints:
 ## Usage
 
 ```
-$ ./mvnw clean spring-boot:run -P local
+$ SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean spring-boot:run -P dev-inmemorydb
 ```
 
 Browse to http://localhost:8081/orders

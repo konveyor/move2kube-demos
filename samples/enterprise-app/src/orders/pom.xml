@@ -92,11 +92,6 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>io.rest-assured</groupId>
 			<artifactId>rest-assured</artifactId>
 			<scope>test</scope>
@@ -130,7 +125,7 @@
 
 	<profiles>
 		<profile>
-			<id>local</id>
+			<id>dev-inmemorydb</id>
 			<activation />
 			<dependencies>
 				<dependency>
@@ -141,20 +136,7 @@
 			</dependencies>
 		</profile>
 		<profile>
-			<id>cloudfoundry</id>
-			<build>
-				<finalName>ROOT</finalName>
-			</build>
-			<dependencies>
-				<dependency>
-					<groupId>com.h2database</groupId>
-					<artifactId>h2</artifactId>
-					<scope>runtime</scope>
-				</dependency>
-			</dependencies>
-		</profile>
-		<profile>
-			<id>openshift</id>
+			<id>prod-externaldb</id>
 			<dependencies>
 				<dependency>
 					<groupId>org.postgresql</groupId>
@@ -165,69 +147,6 @@
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
-		</profile>
-		<profile>
-			<id>openshift-manual</id>
-			<dependencies>
-				<dependency>
-					<groupId>org.postgresql</groupId>
-					<artifactId>postgresql</artifactId>
-					<scope>runtime</scope>
-				</dependency>
-			</dependencies>
-			<activation />
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>io.fabric8</groupId>
-						<artifactId>fabric8-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>fmp</id>
-								<phase>package</phase>
-								<goals>
-									<goal>resource</goal>
-									<goal>build</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>openshift-it</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-failsafe-plugin</artifactId>
-						<executions>
-							<execution>
-								<goals>
-									<goal>integration-test</goal>
-									<goal>verify</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-			<activation />
-			<dependencies>
-				<dependency>
-					<groupId>io.fabric8</groupId>
-					<artifactId>kubernetes-client</artifactId>
-					<version>1.4.34</version>
-					<scope>test</scope>
-				</dependency>
-				<dependency>
-					<groupId>io.fabric8</groupId>
-					<artifactId>openshift-client</artifactId>
-					<version>1.4.34</version>
-					<scope>test</scope>
-				</dependency>
-			</dependencies>
 		</profile>
 	</profiles>
 </project>

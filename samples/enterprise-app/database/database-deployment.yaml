@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    move2kube.konveyor.io/service.expose: "false"
+  labels:
+    move2kube.konveyor.io/service: database
+  name: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      move2kube.konveyor.io/service: database
+  template:
+    metadata:
+      annotations:
+        move2kube.konveyor.io/service.expose: "false"
+      labels:
+        move2kube.konveyor.io/service: database
+      name: database
+    spec:
+      containers:
+        - image: postgres
+          imagePullPolicy: Always
+          name: database
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: database-secret
+                  key: password
+          volumeMounts:
+            - name: secret-volume
+              readOnly: true
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: secret-volume
+          secret:
+            secretName: database-secret
+      restartPolicy: Always

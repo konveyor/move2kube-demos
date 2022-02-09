@@ -1,17 +1,19 @@
 apiVersion: move2kube.konveyor.io/v1alpha1
 kind: CfApps
+metadata:
+  name: cf-provider-name
 spec:
   applications:
     - application:
         guid: id1
         createdat: "2021-12-14T10:01:40Z"
-        updatedat: "2021-12-14T10:03:08Z"
+        updatedat: "2022-02-08T10:15:53Z"
         name: orders
         memory: 1024
         instances: 1
         diskquota: 1024
-        spaceguid: space-id1
-        stackguid: stack-id1
+        spaceguid: space-id
+        stackguid: stack-id
         state: STARTED
         packagestate: STAGED
         command: ""
@@ -23,7 +25,7 @@ spec:
         healthchecktimeout: 0
         diego: true
         enablessh: true
-        detectedstartcommand: 'JAVA_OPTS="-agentpath:$PWD/.java-buildpack/open_jdk_jre/bin/jvmkill-1.16.0_RELEASE=printHeapHistogram=1 -Djava.io.tmpdir=$TMPDIR -XX:ActiveProcessorCount=$(nproc) -Djava.ext.dirs=$PWD/.java-buildpack/container_security_provider:$PWD/.java-buildpack/open_jdk_jre/lib/ext -Djava.security.properties=$PWD/.java-buildpack/java_security/java.security $JAVA_OPTS" && CALCULATED_MEMORY=$($PWD/.java-buildpack/open_jdk_jre/bin/java-buildpack-memory-calculator-3.13.0_RELEASE -totMemory=$MEMORY_LIMIT -loadedClasses=23193 -poolType=metaspace -stackThreads=250 -vmOptions="$JAVA_OPTS") && echo JVM Memory Configuration: $CALCULATED_MEMORY && JAVA_OPTS="$JAVA_OPTS $CALCULATED_MEMORY" && MALLOC_ARENA_MAX=2 SERVER_PORT=$PORT eval exec $PWD/.java-buildpack/open_jdk_jre/bin/java $JAVA_OPTS -cp $PWD/. org.springframework.boot.loader.JarLauncher'
+        detectedstartcommand: 'JAVA_OPTS="-agentpath:$PWD/.java-buildpack/open_jdk_jre/bin/jvmkill-1.16.0_RELEASE=printHeapHistogram=1 -Djava.io.tmpdir=$TMPDIR -XX:ActiveProcessorCount=$(nproc) -Djava.ext.dirs=$PWD/.java-buildpack/container_security_provider:$PWD/.java-buildpack/open_jdk_jre/lib/ext -Djava.security.properties=$PWD/.java-buildpack/java_security/java.security $JAVA_OPTS" && CALCULATED_MEMORY=$($PWD/.java-buildpack/open_jdk_jre/bin/java-buildpack-memory-calculator-3.13.0_RELEASE -totMemory=$MEMORY_LIMIT -loadedClasses=23199 -poolType=metaspace -stackThreads=250 -vmOptions="$JAVA_OPTS") && echo JVM Memory Configuration: $CALCULATED_MEMORY && JAVA_OPTS="$JAVA_OPTS $CALCULATED_MEMORY" && MALLOC_ARENA_MAX=2 SERVER_PORT=$PORT eval exec $PWD/.java-buildpack/open_jdk_jre/bin/java $JAVA_OPTS -cp $PWD/. org.springframework.boot.loader.JarLauncher'
         dockerimage: ""
         dockercredentialsjson: {}
         dockercredentials:
@@ -34,33 +36,33 @@ spec:
         stagingfaileddescription: ""
         ports:
           - 8080
-        spaceurl: /v2/spaces/space-id1
+        spaceurl: /v2/spaces/space-id
         spacedata:
           meta:
-            guid: space-id1
-            url: /v2/spaces/space-id1
+            guid: space-id
+            url: /v2/spaces/space-id
             createdat: "2020-10-05T05:29:46Z"
             updatedat: "2020-10-05T05:29:46Z"
           entity:
-            guid: space-id1
+            guid: space-id
             createdat: ""
             updatedat: ""
             name: dev
-            organizationguid: org-id1
-            orgurl: /v2/organizations/org-id1
+            organizationguid: org-id
+            orgurl: /v2/organizations/org-id
             orgdata:
               meta:
-                guid: org-id1
-                url: /v2/organizations/org-id1
+                guid: org-id
+                url: /v2/organizations/org-id
                 createdat: "2020-10-05T05:29:31Z"
                 updatedat: "2020-10-05T05:29:31Z"
               entity:
-                guid: org-id1
+                guid: org-id
                 createdat: ""
                 updatedat: ""
                 name: org-name
                 status: active
-                quotadefinitionguid: quota-id
+                quotadefinitionguid: quota-def-id
                 defaultisolationsegmentguid: ""
             quotadefinitionguid: ""
             isolationsegmentguid: ""
@@ -73,9 +75,9 @@ spec:
         runningenv:
           BLUEMIX_REGION: region
         systemenv:
-          VCAP_SERVICES: '{}'
+          VCAP_SERVICES: '{"cloud-object-storage":[{"binding_guid":"binding-id","binding_name":null,"credentials":{"apikey":"key","endpoints":"cloud-object-storage-endpoints","iam_apikey_description":"Auto-generated for binding","iam_apikey_name":"apikey-name","iam_role_crn":"serviceRole:Writer","iam_serviceid_crn":"serviceid:ServiceId","resource_instance_id":"resource-id"},"instance_guid":"instance-id","instance_name":"Cloud Object Storage-0h","label":"cloud-object-storage","name":"Cloud Object Storage-0h","plan":"Lite","provider":null,"syslog_drain_url":null,"tags":["Lite","storage"],"volume_mounts":[]}]}'
         applicationenv:
-          VCAP_APPLICATION: '{"application_id":"id1","application_name":"orders","application_uris":["orders-proud-bilby-rf.net"],"application_version":"app-ver1","cf_api":"app-url","limits":{"disk":1024,"fds":16384,"mem":1024},"name":"orders","organization_id":"org-id1","organization_name":"org-name","process_id":"id1","process_type":"web","space_id":"space-id1","space_name":"dev","uris":["orders-proud-bilby-rf.net"],"users":null,"version":"app-ver1"}'
+          VCAP_APPLICATION: '{"application_id":"id1","application_name":"orders","application_uris":["orders-proud-bilby-rf.net"],"application_version":"app-ver1","cf_api":"cf-api-url","limits":{"disk":1024,"fds":16384,"mem":1024},"name":"orders","organization_id":"org-id","organization_name":"org-name","process_id":"id1","process_type":"web","space_id":"space-id","space_name":"dev","uris":["orders-proud-bilby-rf.net"],"users":null,"version":"app-ver1"}'
     - application:
         guid: id2
         createdat: "2021-12-14T10:04:00Z"
@@ -84,8 +86,8 @@ spec:
         memory: 1024
         instances: 1
         diskquota: 1024
-        spaceguid: space-id1
-        stackguid: stack-id1
+        spaceguid: space-id
+        stackguid: stack-id
         state: STARTED
         packagestate: STAGED
         command: ""
@@ -108,33 +110,33 @@ spec:
         stagingfaileddescription: ""
         ports:
           - 8080
-        spaceurl: /v2/spaces/space-id1
+        spaceurl: /v2/spaces/space-id
         spacedata:
           meta:
-            guid: space-id1
-            url: /v2/spaces/space-id1
+            guid: space-id
+            url: /v2/spaces/space-id
             createdat: "2020-10-05T05:29:46Z"
             updatedat: "2020-10-05T05:29:46Z"
           entity:
-            guid: space-id1
+            guid: space-id
             createdat: ""
             updatedat: ""
             name: dev
-            organizationguid: org-id1
-            orgurl: /v2/organizations/org-id1
+            organizationguid: org-id
+            orgurl: /v2/organizations/org-id
             orgdata:
               meta:
-                guid: org-id1
-                url: /v2/organizations/org-id1
+                guid: org-id
+                url: /v2/organizations/org-id
                 createdat: "2020-10-05T05:29:31Z"
                 updatedat: "2020-10-05T05:29:31Z"
               entity:
-                guid: org-id1
+                guid: org-id
                 createdat: ""
                 updatedat: ""
                 name: org-name
                 status: active
-                quotadefinitionguid: quota-id
+                quotadefinitionguid: quota-def-id
                 defaultisolationsegmentguid: ""
             quotadefinitionguid: ""
             isolationsegmentguid: ""
@@ -149,7 +151,7 @@ spec:
         systemenv:
           VCAP_SERVICES: '{}'
         applicationenv:
-          VCAP_APPLICATION: '{"application_id":"id2","application_name":"gateway","application_uris":["gateway-restless-fossa-ws.net"],"application_version":"app-ver2","cf_api":"app-url","limits":{"disk":1024,"fds":16384,"mem":1024},"name":"gateway","organization_id":"org-id1","organization_name":"org-name","process_id":"id2","process_type":"web","space_id":"space-id1","space_name":"dev","uris":["gateway-restless-fossa-ws.net"],"users":null,"version":"app-ver2"}'
+          VCAP_APPLICATION: '{"application_id":"id2","application_name":"gateway","application_uris":["gateway-restless-fossa-ws.net"],"application_version":"app-ver2","cf_api":"cf-api-url","limits":{"disk":1024,"fds":16384,"mem":1024},"name":"gateway","organization_id":"org-id","organization_name":"org-name","process_id":"id2","process_type":"web","space_id":"space-id","space_name":"dev","uris":["gateway-restless-fossa-ws.net"],"users":null,"version":"app-ver2"}'
     - application:
         guid: id3
         createdat: "2021-12-14T14:54:25Z"
@@ -158,8 +160,8 @@ spec:
         memory: 1024
         instances: 1
         diskquota: 1024
-        spaceguid: space-id1
-        stackguid: stack-id1
+        spaceguid: space-id
+        stackguid: stack-id
         state: STARTED
         packagestate: STAGED
         command: npm run start
@@ -182,33 +184,33 @@ spec:
         stagingfaileddescription: ""
         ports:
           - 8080
-        spaceurl: /v2/spaces/space-id1
+        spaceurl: /v2/spaces/space-id
         spacedata:
           meta:
-            guid: space-id1
-            url: /v2/spaces/space-id1
+            guid: space-id
+            url: /v2/spaces/space-id
             createdat: "2020-10-05T05:29:46Z"
             updatedat: "2020-10-05T05:29:46Z"
           entity:
-            guid: space-id1
+            guid: space-id
             createdat: ""
             updatedat: ""
             name: dev
-            organizationguid: org-id1
-            orgurl: /v2/organizations/org-id1
+            organizationguid: org-id
+            orgurl: /v2/organizations/org-id
             orgdata:
               meta:
-                guid: org-id1
-                url: /v2/organizations/org-id1
+                guid: org-id
+                url: /v2/organizations/org-id
                 createdat: "2020-10-05T05:29:31Z"
                 updatedat: "2020-10-05T05:29:31Z"
               entity:
-                guid: org-id1
+                guid: org-id
                 createdat: ""
                 updatedat: ""
                 name: org-name
                 status: active
-                quotadefinitionguid: quota-id
+                quotadefinitionguid: quota-def-id
                 defaultisolationsegmentguid: ""
             quotadefinitionguid: ""
             isolationsegmentguid: ""
@@ -223,4 +225,4 @@ spec:
         systemenv:
           VCAP_SERVICES: '{}'
         applicationenv:
-          VCAP_APPLICATION: '{"application_id":"id3","application_name":"frontend","application_uris":["frontend-patient-oryx-mc.net"],"application_version":"app-ver3","cf_api":"app-url","limits":{"disk":1024,"fds":16384,"mem":1024},"name":"frontend","organization_id":"org-id1","organization_name":"org-name","process_id":"id3","process_type":"web","space_id":"space-id1","space_name":"dev","uris":["frontend-patient-oryx-mc.net"],"users":null,"version":"app-ver3"}'
+          VCAP_APPLICATION: '{"application_id":"id3","application_name":"frontend","application_uris":["frontend-patient-oryx.net"],"application_version":"app-ver3","cf_api":"cf-api-url","limits":{"disk":1024,"fds":16384,"mem":1024},"name":"frontend","organization_id":"org-id","organization_name":"org-name","process_id":"id3","process_type":"web","space_id":"space-id","space_name":"dev","uris":["frontend-patient-oryx.net"],"users":null,"version":"app-ver3"}'

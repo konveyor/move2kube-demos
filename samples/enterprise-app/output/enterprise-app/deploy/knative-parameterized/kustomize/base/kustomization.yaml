@@ -1,0 +1,6 @@
+resources:
+  - frontend-service.yaml
+  - gateway-service.yaml
+  - inventory-service.yaml
+  - orders-service.yaml
+  - customers-service.yaml

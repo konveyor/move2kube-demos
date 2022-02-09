@@ -1,0 +1,33 @@
+patches:
+  - path: apps-v1-deployment-customers.yaml
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: customers
+  - path: apps-v1-deployment-inventory.yaml
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: inventory
+  - path: apps-v1-deployment-frontend.yaml
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: frontend
+  - path: apps-v1-deployment-gateway.yaml
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: gateway
+  - path: apps-v1-deployment-orders.yaml
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: orders
+resources:
+  - ../../base

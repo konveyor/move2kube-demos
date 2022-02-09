@@ -1,0 +1,32 @@
+version: "3.5"
+services:
+  customers:
+    container_name: customers
+    image: quay.io/move2kube/customers:latest
+    ports:
+      - target: 8080
+        published: 8084
+  frontend:
+    container_name: frontend
+    image: quay.io/move2kube/frontend:latest
+    ports:
+      - target: 8080
+        published: 8083
+  gateway:
+    container_name: gateway
+    image: quay.io/move2kube/gateway:latest
+    ports:
+      - target: 8080
+        published: 8081
+  inventory:
+    container_name: inventory
+    image: quay.io/move2kube/inventory:latest
+    ports:
+      - target: 8080
+        published: 8080
+  orders:
+    container_name: orders
+    image: quay.io/move2kube/orders:latest
+    ports:
+      - target: 8080
+        published: 8082

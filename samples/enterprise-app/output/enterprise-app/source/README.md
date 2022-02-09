@@ -8,7 +8,7 @@ The demo includes the following services:
 
 - **Customers**: The original Retail application from which the rest of microservices have been carved out. It still retains the business logic related to customer management. This legacy application runs on Tomcat and uses an Oracle database.
 - **Orders**: Manages all order related entities. It stores only UIDs to refer to Products and Customers. Implemented with Spring Boot and using a PostgreSQL database.
-- **Inventory**: Manages all product related info. It stores the product name and description. Implemented with Spring Boot and using a PostgreSQL database.
+- **Products**: Manages all product related info. It stores the product name and description. Implemented with Spring Boot and using a PostgreSQL database.
 - **Gateway**: Access and aggregation layer for the whole application. It gets orders data and aggregates products and customers detailed information. Also implemented with the Spring Boot/PostgreSQL stack.
 - **Frontend**: A new front end layer developed with the React flavor of Patternfly, published on Nginx.
 

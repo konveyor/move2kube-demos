@@ -1,0 +1,14 @@
+resources:
+  - enterprise-app-run-clone-build-push-triggertemplate.yaml
+  - frontend-vcapasenv-secret.yaml
+  - enterprise-app-clone-build-push-pipeline.yaml
+  - enterprise-app-git-event-triggerbinding.yaml
+  - enterprise-app-git-repo-eventlistener.yaml
+  - enterprise-app-image-registry-secret.yaml
+  - enterprise-app-ingress.yaml
+  - enterprise-app-tekton-triggers-admin-role.yaml
+  - enterprise-app-tekton-triggers-admin-rolebinding.yaml
+  - enterprise-app-tekton-triggers-admin-serviceaccount.yaml
+  - enterprise-app-clone-push-serviceaccount.yaml
+  - orders-vcapasenv-secret.yaml
+  - gateway-vcapasenv-secret.yaml

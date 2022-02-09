@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  creationTimestamp: null
+  name: enterprise-app-tekton-triggers-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: enterprise-app-tekton-triggers-admin
+subjects:
+  - kind: ServiceAccount
+    name: enterprise-app-tekton-triggers-admin

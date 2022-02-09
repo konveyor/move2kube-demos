@@ -6,11 +6,11 @@ move2kube:
       enable: false
     customers:
       "8080":
-        urlpath: :-
+        urlpath: :C
       activemavenprofiles:
-        - cloudfoundry
+        - prod-externaldb
       activespringbootprofiles:
-        - cloudfoundry
+        - prod-externaldb
       enable: true
       wartransformer: Tomcat
     frontend:
@@ -20,20 +20,29 @@ move2kube:
       port: "8080"
     gateway:
       "8080":
-        urlpath: :-
+        urlpath: :C
       activemavenprofiles:
-        - cloudfoundry
+        - prod
       activespringbootprofiles:
-        - cloudfoundry
+        - prod
+      enable: true
+      port: "8080"
+    inventory:
+      "8080":
+        urlpath: :C
+      activemavenprofiles:
+        - prod-externaldb
+      activespringbootprofiles:
+        - prod-externaldb
       enable: true
       port: "8080"
     orders:
       "8080":
-        urlpath: :-
+        urlpath: :C
       activemavenprofiles:
-        - cloudfoundry
+        - prod-externaldb
       activespringbootprofiles:
-        - cloudfoundry
+        - prod-externaldb
       enable: true
       port: "8080"
   target:

@@ -1,0 +1,162 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  creationTimestamp: null
+  name: enterprise-app-clone-build-push
+spec:
+  params:
+    - description: registry-domain/namespace where the output image should be pushed.
+      name: image-registry-url
+      type: string
+  tasks:
+    - name: clone-1
+      params:
+        - name: url
+          value: '<TODO: insert git repo url>'
+        - name: revision
+          value: main
+        - name: deleteExisting
+          value: "true"
+      taskRef:
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: enterprise-app-shared-data
+    - name: build-push-1
+      params:
+        - name: IMAGE
+          value: $(params.image-registry-url)/gateway
+        - name: DOCKERFILE
+          value: '<TODO: insert path to the Dockerfile>'
+        - name: CONTEXT
+          value: '<TODO: insert path to the directory containing Dockerfile>'
+      runAfter:
+        - clone-1
+      taskRef:
+        name: kaniko
+      workspaces:
+        - name: source
+          workspace: enterprise-app-shared-data
+    - name: clone-2
+      params:
+        - name: url
+          value: '<TODO: insert git repo url>'
+        - name: revision
+          value: main
+        - name: deleteExisting
+          value: "true"
+      runAfter:
+        - build-push-1
+      taskRef:
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: enterprise-app-shared-data
+    - name: build-push-2
+      params:
+        - name: IMAGE
+          value: $(params.image-registry-url)/orders
+        - name: DOCKERFILE
+          value: '<TODO: insert path to the Dockerfile>'
+        - name: CONTEXT
+          value: '<TODO: insert path to the directory containing Dockerfile>'
+      runAfter:
+        - clone-2
+      taskRef:
+        name: kaniko
+      workspaces:
+        - name: source
+          workspace: enterprise-app-shared-data
+    - name: clone-3
+      params:
+        - name: url
+          value: '<TODO: insert git repo url>'
+        - name: revision
+          value: main
+        - name: deleteExisting
+          value: "true"
+      runAfter:
+        - build-push-2
+      taskRef:
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: enterprise-app-shared-data
+    - name: build-push-3
+      params:
+        - name: IMAGE
+          value: $(params.image-registry-url)/customers
+        - name: DOCKERFILE
+          value: '<TODO: insert path to the Dockerfile>'
+        - name: CONTEXT
+          value: '<TODO: insert path to the directory containing Dockerfile>'
+      runAfter:
+        - clone-3
+      taskRef:
+        name: kaniko
+      workspaces:
+        - name: source
+          workspace: enterprise-app-shared-data
+    - name: clone-4
+      params:
+        - name: url
+          value: '<TODO: insert git repo url>'
+        - name: revision
+          value: main
+        - name: deleteExisting
+          value: "true"
+      runAfter:
+        - build-push-3
+      taskRef:
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: enterprise-app-shared-data
+    - name: build-push-4
+      params:
+        - name: IMAGE
+          value: $(params.image-registry-url)/frontend
+        - name: DOCKERFILE
+          value: '<TODO: insert path to the Dockerfile>'
+        - name: CONTEXT
+          value: '<TODO: insert path to the directory containing Dockerfile>'
+      runAfter:
+        - clone-4
+      taskRef:
+        name: kaniko
+      workspaces:
+        - name: source
+          workspace: enterprise-app-shared-data
+    - name: clone-5
+      params:
+        - name: url
+          value: '<TODO: insert git repo url>'
+        - name: revision
+          value: main
+        - name: deleteExisting
+          value: "true"
+      runAfter:
+        - build-push-4
+      taskRef:
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: enterprise-app-shared-data
+    - name: build-push-5
+      params:
+        - name: IMAGE
+          value: $(params.image-registry-url)/inventory
+        - name: DOCKERFILE
+          value: '<TODO: insert path to the Dockerfile>'
+        - name: CONTEXT
+          value: '<TODO: insert path to the directory containing Dockerfile>'
+      runAfter:
+        - clone-5
+      taskRef:
+        name: kaniko
+      workspaces:
+        - name: source
+          workspace: enterprise-app-shared-data
+  workspaces:
+    - description: This workspace will receive the cloned git repo and be passed to the kaniko task for building the image.
+      name: enterprise-app-shared-data

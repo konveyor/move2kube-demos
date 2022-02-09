@@ -1,0 +1,32 @@
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+    creationTimestamp: null
+    name: enterprise-app-tekton-triggers-admin
+rules:
+    - apiGroups:
+        - triggers.tekton.dev
+      resources:
+        - eventlisteners
+        - triggerbindings
+        - triggertemplates
+      verbs:
+        - get
+    - apiGroups:
+        - tekton.dev
+      resources:
+        - pipelineruns
+      verbs:
+        - create
+    - apiGroups:
+        - ""
+      resources:
+        - configmaps
+      verbs:
+        - get
+        - list
+        - watch
+
+...

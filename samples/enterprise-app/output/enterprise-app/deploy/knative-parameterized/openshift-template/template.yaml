@@ -1,0 +1,141 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: enterprise-app-template
+  generatename: ""
+  namespace: ""
+  selflink: ""
+  uid: ""
+  resourceversion: ""
+  generation: 0
+  creationtimestamp: "0001-01-01T00:00:00Z"
+  deletiontimestamp: null
+  deletiongraceperiodseconds: null
+  labels: {}
+  annotations: {}
+  ownerreferences: []
+  finalizers: []
+  clustername: ""
+  managedfields: []
+objects:
+  - apiVersion: serving.knative.dev/v1
+    kind: Service
+    metadata:
+      creationTimestamp: null
+      labels:
+        move2kube.konveyor.io/service: customers
+      name: customers
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+            - image: quay.io/move2kube/customers:latest
+              imagePullPolicy: Always
+              name: customers
+              ports:
+                - containerPort: 8080
+              resources: {}
+          imagePullSecrets:
+            - name: quay-io-imagepullsecret
+          restartPolicy: Always
+          securityContext: {}
+    status: {}
+  - apiVersion: serving.knative.dev/v1
+    kind: Service
+    metadata:
+      creationTimestamp: null
+      labels:
+        move2kube.konveyor.io/service: frontend
+      name: frontend
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+            - image: quay.io/move2kube/frontend:latest
+              imagePullPolicy: Always
+              name: frontend
+              ports:
+                - containerPort: 8080
+              resources: {}
+          imagePullSecrets:
+            - name: quay-io-imagepullsecret
+          restartPolicy: Always
+          securityContext: {}
+    status: {}
+  - apiVersion: serving.knative.dev/v1
+    kind: Service
+    metadata:
+      creationTimestamp: null
+      labels:
+        move2kube.konveyor.io/service: gateway
+      name: gateway
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+            - image: quay.io/move2kube/gateway:latest
+              imagePullPolicy: Always
+              name: gateway
+              ports:
+                - containerPort: 8080
+              resources: {}
+          imagePullSecrets:
+            - name: quay-io-imagepullsecret
+          restartPolicy: Always
+          securityContext: {}
+    status: {}
+  - apiVersion: serving.knative.dev/v1
+    kind: Service
+    metadata:
+      creationTimestamp: null
+      labels:
+        move2kube.konveyor.io/service: inventory
+      name: inventory
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+            - image: quay.io/move2kube/inventory:latest
+              imagePullPolicy: Always
+              name: inventory
+              ports:
+                - containerPort: 8080
+              resources: {}
+          imagePullSecrets:
+            - name: quay-io-imagepullsecret
+          restartPolicy: Always
+          securityContext: {}
+    status: {}
+  - apiVersion: serving.knative.dev/v1
+    kind: Service
+    metadata:
+      creationTimestamp: null
+      labels:
+        move2kube.konveyor.io/service: orders
+      name: orders
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+            - image: quay.io/move2kube/orders:latest
+              imagePullPolicy: Always
+              name: orders
+              ports:
+                - containerPort: 8080
+              resources: {}
+          imagePullSecrets:
+            - name: quay-io-imagepullsecret
+          restartPolicy: Always
+          securityContext: {}
+    status: {}
+parameters: []

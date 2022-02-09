@@ -1,0 +1,382 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: enterprise-app-template
+  generatename: ""
+  namespace: ""
+  selflink: ""
+  uid: ""
+  resourceversion: ""
+  generation: 0
+  creationtimestamp: "0001-01-01T00:00:00Z"
+  deletiontimestamp: null
+  deletiongraceperiodseconds: null
+  labels: {}
+  annotations: {}
+  ownerreferences: []
+  finalizers: []
+  clustername: ""
+  managedfields: []
+objects:
+  - apiVersion: v1
+    kind: Secret
+    metadata:
+      creationTimestamp: null
+      name: frontend-vcapasenv
+    type: Opaque
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      creationTimestamp: null
+      labels:
+        move2kube.konveyor.io/service: gateway
+      name: gateway
+    spec:
+      internalTrafficPolicy: Cluster
+      ports:
+        - name: port-8080
+          port: 8080
+          protocol: TCP
+          targetPort: 8080
+      selector:
+        move2kube.konveyor.io/service: gateway
+      sessionAffinity: None
+      type: ClusterIP
+    status:
+      loadBalancer: {}
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      creationTimestamp: null
+      labels:
+        move2kube.konveyor.io/service: orders
+      name: orders
+    spec:
+      progressDeadlineSeconds: 600
+      replicas: ${{COMMON_REPLICAS}}
+      revisionHistoryLimit: 10
+      selector:
+        matchLabels:
+          move2kube.konveyor.io/service: orders
+      strategy:
+        rollingUpdate:
+          maxSurge: 25%
+          maxUnavailable: 25%
+        type: RollingUpdate
+      template:
+        metadata:
+          creationTimestamp: null
+          labels:
+            move2kube.konveyor.io/service: orders
+          name: orders
+        spec:
+          containers:
+            - image: quay.io/move2kube/orders:latest
+              imagePullPolicy: Always
+              name: orders
+              ports:
+                - containerPort: 8080
+                  protocol: TCP
+              resources: {}
+              terminationMessagePath: /dev/termination-log
+              terminationMessagePolicy: File
+          dnsPolicy: ClusterFirst
+          imagePullSecrets:
+            - name: quay-io-imagepullsecret
+          restartPolicy: Always
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+    status: {}
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      creationTimestamp: null
+      labels:
+        move2kube.konveyor.io/service: frontend
+      name: frontend
+    spec:
+      internalTrafficPolicy: Cluster
+      ports:
+        - name: port-8080
+          port: 8080
+          protocol: TCP
+          targetPort: 8080
+      selector:
+        move2kube.konveyor.io/service: frontend
+      sessionAffinity: None
+      type: ClusterIP
+    status:
+      loadBalancer: {}
+  - apiVersion: v1
+    kind: Secret
+    metadata:
+      creationTimestamp: null
+      name: gateway-vcapasenv
+    type: Opaque
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      creationTimestamp: null
+      labels:
+        move2kube.konveyor.io/service: inventory
+      name: inventory
+    spec:
+      progressDeadlineSeconds: 600
+      replicas: ${{COMMON_REPLICAS}}
+      revisionHistoryLimit: 10
+      selector:
+        matchLabels:
+          move2kube.konveyor.io/service: inventory
+      strategy:
+        rollingUpdate:
+          maxSurge: 25%
+          maxUnavailable: 25%
+        type: RollingUpdate
+      template:
+        metadata:
+          creationTimestamp: null
+          labels:
+            move2kube.konveyor.io/service: inventory
+          name: inventory
+        spec:
+          containers:
+            - image: quay.io/move2kube/inventory:latest
+              imagePullPolicy: Always
+              name: inventory
+              ports:
+                - containerPort: 8080
+                  protocol: TCP
+              resources: {}
+              terminationMessagePath: /dev/termination-log
+              terminationMessagePolicy: File
+          dnsPolicy: ClusterFirst
+          imagePullSecrets:
+            - name: quay-io-imagepullsecret
+          restartPolicy: Always
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+    status: {}
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      creationTimestamp: null
+      labels:
+        move2kube.konveyor.io/service: inventory
+      name: inventory
+    spec:
+      internalTrafficPolicy: Cluster
+      ports:
+        - name: port-8080
+          port: 8080
+          protocol: TCP
+          targetPort: 8080
+      selector:
+        move2kube.konveyor.io/service: inventory
+      sessionAffinity: None
+      type: ClusterIP
+    status:
+      loadBalancer: {}
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      creationTimestamp: null
+      labels:
+        move2kube.konveyor.io/service: orders
+      name: orders
+    spec:
+      internalTrafficPolicy: Cluster
+      ports:
+        - name: port-8080
+          port: 8080
+          protocol: TCP
+          targetPort: 8080
+      selector:
+        move2kube.konveyor.io/service: orders
+      sessionAffinity: None
+      type: ClusterIP
+    status:
+      loadBalancer: {}
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      creationTimestamp: null
+      labels:
+        move2kube.konveyor.io/service: customers
+      name: customers
+    spec:
+      progressDeadlineSeconds: 600
+      replicas: ${{COMMON_REPLICAS}}
+      revisionHistoryLimit: 10
+      selector:
+        matchLabels:
+          move2kube.konveyor.io/service: customers
+      strategy:
+        rollingUpdate:
+          maxSurge: 25%
+          maxUnavailable: 25%
+        type: RollingUpdate
+      template:
+        metadata:
+          creationTimestamp: null
+          labels:
+            move2kube.konveyor.io/service: customers
+          name: customers
+        spec:
+          containers:
+            - image: quay.io/move2kube/customers:latest
+              imagePullPolicy: Always
+              name: customers
+              ports:
+                - containerPort: 8080
+                  protocol: TCP
+              resources: {}
+              terminationMessagePath: /dev/termination-log
+              terminationMessagePolicy: File
+          dnsPolicy: ClusterFirst
+          imagePullSecrets:
+            - name: quay-io-imagepullsecret
+          restartPolicy: Always
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+    status: {}
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      creationTimestamp: null
+      labels:
+        move2kube.konveyor.io/service: customers
+      name: customers
+    spec:
+      internalTrafficPolicy: Cluster
+      ports:
+        - name: port-8080
+          port: 8080
+          protocol: TCP
+          targetPort: 8080
+      selector:
+        move2kube.konveyor.io/service: customers
+      sessionAffinity: None
+      type: ClusterIP
+    status:
+      loadBalancer: {}
+  - apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+      creationTimestamp: null
+      labels:
+        move2kube.konveyor.io/service: enterprise-app
+      name: enterprise-app
+    spec:
+      rules:
+        - host: localhost
+          http:
+            paths:
+              - backend:
+                  service:
+                    name: frontend
+                    port:
+                      name: port-8080
+                path: /
+                pathType: Prefix
+    status:
+      loadBalancer: {}
+  - apiVersion: v1
+    kind: Secret
+    metadata:
+      creationTimestamp: null
+      name: orders-vcapasenv
+    type: Opaque
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      creationTimestamp: null
+      labels:
+        move2kube.konveyor.io/service: frontend
+      name: frontend
+    spec:
+      progressDeadlineSeconds: 600
+      replicas: ${{COMMON_REPLICAS}}
+      revisionHistoryLimit: 10
+      selector:
+        matchLabels:
+          move2kube.konveyor.io/service: frontend
+      strategy:
+        rollingUpdate:
+          maxSurge: 25%
+          maxUnavailable: 25%
+        type: RollingUpdate
+      template:
+        metadata:
+          creationTimestamp: null
+          labels:
+            move2kube.konveyor.io/service: frontend
+          name: frontend
+        spec:
+          containers:
+            - image: quay.io/move2kube/frontend:latest
+              imagePullPolicy: Always
+              name: frontend
+              ports:
+                - containerPort: 8080
+                  protocol: TCP
+              resources: {}
+              terminationMessagePath: /dev/termination-log
+              terminationMessagePolicy: File
+          dnsPolicy: ClusterFirst
+          imagePullSecrets:
+            - name: quay-io-imagepullsecret
+          restartPolicy: Always
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+    status: {}
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      creationTimestamp: null
+      labels:
+        move2kube.konveyor.io/service: gateway
+      name: gateway
+    spec:
+      progressDeadlineSeconds: 600
+      replicas: ${{COMMON_REPLICAS}}
+      revisionHistoryLimit: 10
+      selector:
+        matchLabels:
+          move2kube.konveyor.io/service: gateway
+      strategy:
+        rollingUpdate:
+          maxSurge: 25%
+          maxUnavailable: 25%
+        type: RollingUpdate
+      template:
+        metadata:
+          creationTimestamp: null
+          labels:
+            move2kube.konveyor.io/service: gateway
+          name: gateway
+        spec:
+          containers:
+            - image: quay.io/move2kube/gateway:latest
+              imagePullPolicy: Always
+              name: gateway
+              ports:
+                - containerPort: 8080
+                  protocol: TCP
+              resources: {}
+              terminationMessagePath: /dev/termination-log
+              terminationMessagePolicy: File
+          dnsPolicy: ClusterFirst
+          imagePullSecrets:
+            - name: quay-io-imagepullsecret
+          restartPolicy: Always
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+    status: {}
+parameters:
+  - name: COMMON_REPLICAS
+    value: "2"

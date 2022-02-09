@@ -1,0 +1,8 @@
+---
+applications:
+- name: orders
+  memory: 1G
+  random-route: true
+  instances: 1
+  buildpack: https://github.com/cloudfoundry/java-buildpack
+  path: target/ROOT.jar

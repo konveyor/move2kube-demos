@@ -1,0 +1,11 @@
+
+---
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerBinding
+metadata:
+    creationTimestamp: null
+    name: enterprise-app-git-event
+spec: {}
+status: {}
+
+...

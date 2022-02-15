@@ -6,7 +6,7 @@ move2kube:
       enable: false
     customers:
       "8080":
-        urlpath: :C
+        servicetype: ClusterIP
       activemavenprofiles:
         - prod-externaldb
       activespringbootprofiles:
@@ -15,12 +15,13 @@ move2kube:
       wartransformer: Tomcat
     frontend:
       "8080":
+        servicetype: Ingress
         urlpath: /
       enable: true
       port: "8080"
     gateway:
       "8080":
-        urlpath: :C
+        servicetype: ClusterIP
       activemavenprofiles:
         - prod
       activespringbootprofiles:
@@ -29,7 +30,7 @@ move2kube:
       port: "8080"
     inventory:
       "8080":
-        urlpath: :C
+        servicetype: ClusterIP
       activemavenprofiles:
         - prod-externaldb
       activespringbootprofiles:
@@ -38,7 +39,7 @@ move2kube:
       port: "8080"
     orders:
       "8080":
-        urlpath: :C
+        servicetype: ClusterIP
       activemavenprofiles:
         - prod-externaldb
       activespringbootprofiles:

@@ -1,0 +1,438 @@
+apiVersion: move2kube.konveyor.io/v1alpha1
+kind: QACache
+spec:
+  solutions:
+    - id: move2kube.transformers.types
+      type: MultiSelect
+      description: 'Select all transformer types that you are interested in:'
+      hints:
+        - Services that don't support any of the transformer types you are interested in will be ignored.
+      options:
+        - Buildconfig
+        - CloudFoundry
+        - ClusterSelector
+        - ComposeAnalyser
+        - ComposeGenerator
+        - ContainerImagesPushScriptGenerator
+        - DockerfileDetector
+        - DockerfileImageBuildScript
+        - DockerfileParser
+        - DotNetCore-Dockerfile
+        - EarAnalyser
+        - EarRouter
+        - Golang-Dockerfile
+        - Gradle
+        - Jar
+        - Jboss
+        - Knative
+        - Kubernetes
+        - KubernetesVersionChanger
+        - Liberty
+        - Maven
+        - Nodejs-Dockerfile
+        - PHP-Dockerfile
+        - Parameterizer
+        - Python-Dockerfile
+        - ReadMeGenerator
+        - Ruby-Dockerfile
+        - Rust-Dockerfile
+        - Tekton
+        - Tomcat
+        - WarAnalyser
+        - WarRouter
+        - WinConsoleApp-Dockerfile
+        - WinSLWebApp-Dockerfile
+        - WinWebApp-Dockerfile
+        - ZuulAnalyser
+      default:
+        - Buildconfig
+        - CloudFoundry
+        - ClusterSelector
+        - ComposeAnalyser
+        - ComposeGenerator
+        - ContainerImagesPushScriptGenerator
+        - DockerfileDetector
+        - DockerfileImageBuildScript
+        - DockerfileParser
+        - DotNetCore-Dockerfile
+        - EarAnalyser
+        - EarRouter
+        - Golang-Dockerfile
+        - Gradle
+        - Jar
+        - Jboss
+        - Knative
+        - Kubernetes
+        - KubernetesVersionChanger
+        - Liberty
+        - Maven
+        - Nodejs-Dockerfile
+        - PHP-Dockerfile
+        - Parameterizer
+        - Python-Dockerfile
+        - ReadMeGenerator
+        - Ruby-Dockerfile
+        - Rust-Dockerfile
+        - Tekton
+        - Tomcat
+        - WarAnalyser
+        - WarRouter
+        - WinConsoleApp-Dockerfile
+        - WinSLWebApp-Dockerfile
+        - WinWebApp-Dockerfile
+        - ZuulAnalyser
+      answer:
+        - Buildconfig
+        - CloudFoundry
+        - ClusterSelector
+        - ComposeAnalyser
+        - ComposeGenerator
+        - ContainerImagesPushScriptGenerator
+        - DockerfileDetector
+        - DockerfileImageBuildScript
+        - DockerfileParser
+        - DotNetCore-Dockerfile
+        - EarAnalyser
+        - EarRouter
+        - Golang-Dockerfile
+        - Gradle
+        - Jar
+        - Jboss
+        - Knative
+        - Kubernetes
+        - KubernetesVersionChanger
+        - Liberty
+        - Maven
+        - Nodejs-Dockerfile
+        - PHP-Dockerfile
+        - Parameterizer
+        - Python-Dockerfile
+        - ReadMeGenerator
+        - Ruby-Dockerfile
+        - Rust-Dockerfile
+        - Tekton
+        - Tomcat
+        - WarAnalyser
+        - WarRouter
+        - WinConsoleApp-Dockerfile
+        - WinSLWebApp-Dockerfile
+        - WinWebApp-Dockerfile
+        - ZuulAnalyser
+    - id: move2kube.services.[].enable
+      type: MultiSelect
+      description: 'Select all services that are needed:'
+      hints:
+        - The services unselected here will be ignored.
+      options:
+        - config-utils
+        - customers
+        - frontend
+        - gateway
+        - inventory
+        - orders
+      default:
+        - config-utils
+        - customers
+        - frontend
+        - gateway
+        - inventory
+        - orders
+      answer:
+        - customers
+        - frontend
+        - gateway
+        - inventory
+        - orders
+    - id: move2kube.services.customers.activemavenprofiles
+      type: MultiSelect
+      description: Choose the Maven profile to be used for the service customers
+      hints:
+        - Selected Maven profiles will be used for setting configuration for the service customers
+      options:
+        - dev-inmemorydb
+        - prod-externaldb
+      default:
+        - prod-externaldb
+      answer:
+        - prod-externaldb
+    - id: move2kube.services.customers.activespringbootprofiles
+      type: MultiSelect
+      description: Choose Springboot profiles to be used for the service customers
+      hints:
+        - Selected Springboot profiles will be used for setting configuration for the service customers
+      options:
+        - dev-inmemorydb
+        - prod-externaldb
+      default:
+        - dev-inmemorydb
+        - prod-externaldb
+      answer:
+        - prod-externaldb
+    - id: move2kube.services.inventory.activemavenprofiles
+      type: MultiSelect
+      description: Choose the Maven profile to be used for the service inventory
+      hints:
+        - Selected Maven profiles will be used for setting configuration for the service inventory
+      options:
+        - dev-inmemorydb
+        - prod-externaldb
+      default:
+        - prod-externaldb
+      answer:
+        - prod-externaldb
+    - id: move2kube.services.inventory.activespringbootprofiles
+      type: MultiSelect
+      description: Choose Springboot profiles to be used for the service inventory
+      hints:
+        - Selected Springboot profiles will be used for setting configuration for the service inventory
+      options:
+        - dev-inmemorydb
+        - prod-externaldb
+      default:
+        - dev-inmemorydb
+        - prod-externaldb
+      answer:
+        - prod-externaldb
+    - id: move2kube.services.inventory.port
+      type: Select
+      description: 'Select port to be exposed for the service inventory :'
+      hints:
+        - Select Other if you want to expose the service inventory to some other port
+      options:
+        - "8080"
+        - Other (specify custom option)
+      default: "8080"
+      answer: "8080"
+    - id: move2kube.services.customers.wartransformer
+      type: Select
+      description: Select the transformer to use for service customers
+      options:
+        - Jboss
+        - Liberty
+        - Tomcat
+      default: Jboss
+      answer: Tomcat
+    - id: move2kube.services.gateway.activemavenprofiles
+      type: MultiSelect
+      description: Choose the Maven profile to be used for the service gateway
+      hints:
+        - Selected Maven profiles will be used for setting configuration for the service gateway
+      options:
+        - dev
+        - prod
+      default:
+        - prod
+      answer:
+        - prod
+    - id: move2kube.services.gateway.activespringbootprofiles
+      type: MultiSelect
+      description: Choose Springboot profiles to be used for the service gateway
+      hints:
+        - Selected Springboot profiles will be used for setting configuration for the service gateway
+      options:
+        - dev
+        - prod
+      default:
+        - dev
+        - prod
+      answer:
+        - prod
+    - id: move2kube.services.gateway.port
+      type: Select
+      description: 'Select port to be exposed for the service gateway :'
+      hints:
+        - Select Other if you want to expose the service gateway to some other port
+      options:
+        - "8080"
+        - Other (specify custom option)
+      default: "8080"
+      answer: "8080"
+    - id: move2kube.services.orders.activemavenprofiles
+      type: MultiSelect
+      description: Choose the Maven profile to be used for the service orders
+      hints:
+        - Selected Maven profiles will be used for setting configuration for the service orders
+      options:
+        - dev-inmemorydb
+        - prod-externaldb
+      default:
+        - prod-externaldb
+      answer:
+        - prod-externaldb
+    - id: move2kube.services.orders.activespringbootprofiles
+      type: MultiSelect
+      description: Choose Springboot profiles to be used for the service orders
+      hints:
+        - Selected Springboot profiles will be used for setting configuration for the service orders
+      options:
+        - dev-inmemorydb
+        - prod-externaldb
+      default:
+        - dev-inmemorydb
+        - prod-externaldb
+      answer:
+        - prod-externaldb
+    - id: move2kube.services.orders.port
+      type: Select
+      description: 'Select port to be exposed for the service orders :'
+      hints:
+        - Select Other if you want to expose the service orders to some other port
+      options:
+        - "8080"
+        - Other (specify custom option)
+      default: "8080"
+      answer: "8080"
+    - id: move2kube.services.frontend.port
+      type: Input
+      description: 'Enter the port to be exposed for the service frontend: '
+      hints:
+        - The service frontend will be exposed to the specified port
+      default: "8080"
+      answer: "8080"
+    - id: move2kube.containerruntime
+      type: Select
+      description: 'Select the container runtime to use :'
+      hints:
+        - The container runtime selected will be used in the scripts
+      options:
+        - docker
+        - podman
+      default: docker
+      answer: docker
+    - id: move2kube.target.clustertype
+      type: Select
+      description: 'Choose the cluster type:'
+      hints:
+        - Choose the cluster type you would like to target
+      options:
+        - Openshift
+        - AWS-EKS
+        - Azure-AKS
+        - GCP-GKE
+        - IBM-IKS
+        - IBM-Openshift
+        - Kubernetes
+      default: Kubernetes
+      answer: Kubernetes
+    - id: move2kube.services."inventory"."8080".servicetype
+      type: Select
+      description: What kind of service/ingress to create for inventory's 8080 port?
+      hints:
+        - Choose Ingress if you want a ingress/route resource to be created
+      options:
+        - Ingress
+        - LoadBalancer
+        - NodePort
+        - ClusterIP
+        - Don't create service
+      default: Ingress
+      answer: ClusterIP
+    - id: move2kube.services."frontend"."8080".servicetype
+      type: Select
+      description: What kind of service/ingress to create for frontend's 8080 port?
+      hints:
+        - Choose Ingress if you want a ingress/route resource to be created
+      options:
+        - Ingress
+        - LoadBalancer
+        - NodePort
+        - ClusterIP
+        - Don't create service
+      default: Ingress
+      answer: Ingress
+    - id: move2kube.services."frontend"."8080".urlpath
+      type: Input
+      description: Specify the ingress path to expose frontend's 8080 port?
+      hints:
+        - Leave out leading / to use first part as subdomain
+      default: /frontend
+      answer: /
+    - id: move2kube.services."customers"."8080".servicetype
+      type: Select
+      description: What kind of service/ingress to create for customers's 8080 port?
+      hints:
+        - Choose Ingress if you want a ingress/route resource to be created
+      options:
+        - Ingress
+        - LoadBalancer
+        - NodePort
+        - ClusterIP
+        - Don't create service
+      default: Ingress
+      answer: ClusterIP
+    - id: move2kube.minreplicas
+      type: Input
+      description: Provide the minimum number of replicas each service should have
+      hints:
+        - If the value is 0 pods won't be started by default
+      default: "2"
+      answer: "2"
+    - id: move2kube.target.imageregistry.url
+      type: Select
+      description: 'Enter the URL of the image registry : '
+      hints:
+        - You can always change it later by changing the yamls.
+      options:
+        - Other (specify custom option)
+        - index.docker.io
+        - quay.io
+      default: quay.io
+      answer: quay.io
+    - id: move2kube.target.imageregistry.namespace
+      type: Input
+      description: 'Enter the namespace where the new images should be pushed : '
+      hints:
+        - 'Ex : enterprise-app'
+      default: enterprise-app
+      answer: move2kube
+    - id: move2kube.target.imageregistry.logintype
+      type: Select
+      description: '[quay.io] What type of container registry login do you want to use?'
+      hints:
+        - Docker login from config mode, will use the default config from your local machine.
+      options:
+        - Use existing pull secret
+        - No authentication
+        - UserName/Password
+      default: No authentication
+      answer: No authentication
+    - id: move2kube.target.ingress.host
+      type: Input
+      description: Provide the ingress host domain
+      hints:
+        - Ingress host domain is part of service URL
+      default: enterprise-app.com
+      answer: localhost
+    - id: move2kube.target.ingress.tls
+      type: Input
+      description: Provide the TLS secret for ingress
+      hints:
+        - Leave empty to use http
+      default: ""
+      answer: ""
+    - id: move2kube.services."orders"."8080".servicetype
+      type: Select
+      description: What kind of service/ingress to create for orders's 8080 port?
+      hints:
+        - Choose Ingress if you want a ingress/route resource to be created
+      options:
+        - Ingress
+        - LoadBalancer
+        - NodePort
+        - ClusterIP
+        - Don't create service
+      default: Ingress
+      answer: ClusterIP
+    - id: move2kube.services."gateway"."8080".servicetype
+      type: Select
+      description: What kind of service/ingress to create for gateway's 8080 port?
+      hints:
+        - Choose Ingress if you want a ingress/route resource to be created
+      options:
+        - Ingress
+        - LoadBalancer
+        - NodePort
+        - ClusterIP
+        - Don't create service
+      default: Ingress
+      answer: ClusterIP

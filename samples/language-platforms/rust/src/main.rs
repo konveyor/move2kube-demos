@@ -13,15 +13,10 @@
 // limitations under the License.
 
 #[macro_use] extern crate rocket;
-use rocket::Request;
+use std::path::PathBuf;
 
-#[get("/")]
-fn hello() -> &'static str {
-    "This is a rust web app."
-}
-
-#[catch(404)]
-fn not_found(_req: &Request) -> &'static str {
+#[get("/<_file..>")]
+fn hello(_file: PathBuf) -> &'static str {
     "This is a rust web app."
 }
 
@@ -29,5 +24,4 @@ fn not_found(_req: &Request) -> &'static str {
 fn rocket() -> _ {
     rocket::build()
         .mount("/", routes![hello])
-        .register("/", catchers![not_found])
 }

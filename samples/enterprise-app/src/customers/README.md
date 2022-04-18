@@ -24,3 +24,15 @@ $ docker run --rm -it \
     -v "$PWD/target/ROOT.war:/usr/local/tomcat/webapps-javaee/ROOT.war" \
     tomcat
 ```
+
+## Deploying to Cloud Foundry
+
+First login to your Cloud Foundry account `cf login` and then run the below commands to deploy the `customers` service to Cloud Foundry.
+
+```console
+$ SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean package -P dev-inmemorydb
+```
+
+```console
+$ cf push
+```

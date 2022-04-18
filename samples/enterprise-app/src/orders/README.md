@@ -16,3 +16,15 @@ $ SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean spring-boot:run -P dev-inme
 ```
 
 Browse to http://localhost:8081/orders
+
+## Deploying to Cloud Foundry
+
+First login to your Cloud Foundry account `cf login` and then run the below commands to deploy the `orders` service to Cloud Foundry.
+
+```console
+$ SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean package -P dev-inmemorydb
+```
+
+```console
+$ cf push
+```

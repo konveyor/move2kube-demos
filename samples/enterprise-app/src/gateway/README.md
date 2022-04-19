@@ -20,3 +20,26 @@ Browse to:
 - http://localhost:8080/customers
 - http://localhost:8080/orders
 - http://localhost:8080/products
+
+## Deploying to Cloud Foundry
+
+First, deploy the backend services- [orders](https://github.com/Akash-Nayak/move2kube-demos/tree/cloud-foundry/samples/enterprise-app/src/orders#deploying-to-cloud-foundry), [customers](https://github.com/Akash-Nayak/move2kube-demos/tree/cloud-foundry/samples/enterprise-app/src/customers#deploying-to-cloud-foundry) and [inventory](https://github.com/Akash-Nayak/move2kube-demos/tree/cloud-foundry/samples/enterprise-app/src/inventory#deploying-to-cloud-foundry) to Cloud Foundry before deploying the `gateway` service.
+
+Next, update the endpoint URLs of `orders`, `inventory` and `customers` services in the [application-dev.properties](https://github.com/Akash-Nayak/move2kube-demos/blob/main/samples/enterprise-app/src/gateway/src/main/resources/application-dev.properties) file using the App URL for each of these services on Cloud Foundry. Make sure you use `http` in the service URLs in the application-dev.properties file, and not `https`.
+For example:-
+
+```console
+services.orders.url=http://orders-squirrel-hx.mybluemix.net/orders
+services.customers.url=http://customers-waterbuck-hq.mybluemix.net/customers
+services.inventory.url=http://inventory-jaguar-av.mybluemix.net/products
+```
+
+Now, login to your Cloud Foundry account `cf login` and then run the below commands to deploy the `gateway` service to Cloud Foundry.
+
+```console
+$ SPRING_PROFILES_ACTIVE=dev ./mvnw clean package -P dev
+```
+
+```console
+$ cf push
+```

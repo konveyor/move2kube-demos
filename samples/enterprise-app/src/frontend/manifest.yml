@@ -1,8 +1,10 @@
 ---
 applications:
 - name: frontend
-  memory: 1G
+  memory: 2G
   random-route: true
   buildpack: https://github.com/cloudfoundry/nodejs-buildpack
   command: npm run start
   instances: 1
+  env:
+    CF_STAGING_TIMEOUT: 25

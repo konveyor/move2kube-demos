@@ -3,6 +3,7 @@
 This service is a REST API that acts as a circuit breaker to all the backend REST API services.  
 All responses are in JSON format.  
 There are 6 endpoints:
+
 - `/customers` returns a list of all the customers (upto pagination limit)
 - `/customers/{id}` returns the info of the customer with that id.
 - `/orders` returns a list of all the orders (upto pagination limit)
@@ -12,7 +13,7 @@ There are 6 endpoints:
 
 ## Usage
 
-```
+```console
 $ SPRING_PROFILES_ACTIVE=dev ./mvnw clean spring-boot:run -P dev
 ```
 
@@ -23,10 +24,13 @@ Browse to:
 
 ## Deploying to Cloud Foundry
 
-First, deploy the backend services- [orders](https://github.com/Akash-Nayak/move2kube-demos/tree/cloud-foundry/samples/enterprise-app/src/orders#deploying-to-cloud-foundry), [customers](https://github.com/Akash-Nayak/move2kube-demos/tree/cloud-foundry/samples/enterprise-app/src/customers#deploying-to-cloud-foundry) and [inventory](https://github.com/Akash-Nayak/move2kube-demos/tree/cloud-foundry/samples/enterprise-app/src/inventory#deploying-to-cloud-foundry) to Cloud Foundry before deploying the `gateway` service.
+First, deploy the backend services- [orders](https://github.com/konveyor/move2kube-demos/tree/main/samples/enterprise-app/src/orders#deploying-to-cloud-foundry), [customers](https://github.com/konveyor/move2kube-demos/tree/main/samples/enterprise-app/src/customers#deploying-to-cloud-foundry) and [inventory](https://github.com/konveyor/move2kube-demos/tree/main/samples/enterprise-app/src/inventory#deploying-to-cloud-foundry) to Cloud Foundry before deploying the `gateway` service.
 
-Next, update the endpoint URLs of `orders`, `inventory` and `customers` services in the [application-dev.properties](https://github.com/Akash-Nayak/move2kube-demos/blob/main/samples/enterprise-app/src/gateway/src/main/resources/application-dev.properties) file using the App URL for each of these services on Cloud Foundry. Make sure you use `http` in the service URLs in the application-dev.properties file, and not `https`.
+Next, update the endpoint URLs of `orders`, `inventory` and `customers` services in the [application-dev.properties](https://github.com/konveyor/move2kube-demos/blob/main/samples/enterprise-app/src/gateway/src/main/resources/application-dev.properties) file using the App URL for each of these services on Cloud Foundry. Make sure you use `http` in the service URLs in the application-dev.properties file, and not `https`.
+
 For example:-
+
+[`application-dev.properties`](https://github.com/konveyor/move2kube-demos/blob/91e8051731f3508343ad51c0713fc36f05825d1b/samples/enterprise-app/src/gateway/src/main/resources/application-dev.properties#L1)
 
 ```console
 services.orders.url=http://orders-squirrel-hx.mybluemix.net/orders

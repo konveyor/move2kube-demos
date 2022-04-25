@@ -9,7 +9,9 @@ git clone https://github.com/konveyor/mig-demo-apps
 cd mig-demo-apps/apps/e2e-demo
 npm install && npm run start:dev
 ```
+
 ## Development scripts
+
 ```sh
 # Install development/build dependencies
 npm install
@@ -44,6 +46,54 @@ npm run storybook
 # Build storybook component explorer as standalone app (outputs to "storybook-static" dir)
 npm run build:storybook
 ```
+
+## Deploying to Cloud Foundry
+
+First, deploy the [gateway](https://github.com/konveyor/move2kube-demos/tree/main/samples/enterprise-app/src/gateway#deploying-to-cloud-foundry) service to Cloud Foundry before deploying the `frontend` service.
+
+Next, update the endpoint URL of `gateway` service in the [server.js](https://github.com/konveyor/move2kube-demos/blob/main/samples/enterprise-app/src/frontend/server.js) file and the [webpack.dev.js](https://github.com/konveyor/move2kube-demos/blob/main/samples/enterprise-app/src/frontend/webpack.dev.js) using the App URL for the `gateway` service on Cloud Foundry. Make sure you use `http` in the service URLs and not `https`.
+For example:-
+
+[`server.js`](https://github.com/konveyor/move2kube-demos/blob/91e8051731f3508343ad51c0713fc36f05825d1b/samples/enterprise-app/src/frontend/server.js#L25)
+
+```console
+const gateway_svc = `http://gateway-sable-ga.mybluemix.net`;
+```
+
+[`webpack.dev.js`](https://github.com/konveyor/move2kube-demos/blob/91e8051731f3508343ad51c0713fc36f05825d1b/samples/enterprise-app/src/frontend/webpack.dev.js#L20)
+
+```console
+proxy: [
+  {
+    context: ['/customers-api'],
+    target: `http://gateway-sable-ga.mybluemix.net`,
+  },
+  {
+    context: ['/orders-api'],
+    target: `http://gateway-sable-ga.mybluemix.net`,
+  },
+  {
+    context: ['/products-api'],
+    target: `http://gateway-sable-ga.mybluemix.net`,
+  },
+],
+```
+
+Now, login to your Cloud Foundry account `cf login` and then run the below commands to deploy the `frontend` service to Cloud Foundry.
+
+```console
+$ npm install
+```
+
+```console
+$ npm run build
+```
+
+```console
+$ cf push
+```
+
+By-default, the CF_STAGING_TIMEOUT environment variable is set to 15 minutes, but staging/starting the `frontend` service on Cloud Foundry may take more than 15 minutes and thus the `cf push` may fail, and to prevent this we have set the CF_STAGING_TIMEOUT to 25 minutes in the manifest.yml file.
 
 ## Configurations
 * [TypeScript Config](./tsconfig.json)

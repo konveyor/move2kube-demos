@@ -5,4 +5,7 @@ applications:
   random-route: true
   instances: 1
   buildpack: https://github.com/cloudfoundry/java-buildpack
-  path: target/ROOT.jar
+  path: target/gateway-2.0.0-SNAPSHOT.jar
+  env:
+    SPRING_PROFILES_ACTIVE: dev
+    JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{ enabled: false }'

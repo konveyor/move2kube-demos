@@ -79,15 +79,7 @@ proxy: [
 ],
 ```
 
-Now, login to your Cloud Foundry account `cf login` and then run the below commands to deploy the `frontend` service to Cloud Foundry.
-
-```console
-$ npm install
-```
-
-```console
-$ npm run build
-```
+Now, login to your Cloud Foundry account `cf login` and then run the below command to deploy the `frontend` service to Cloud Foundry.
 
 ```console
 $ cf push

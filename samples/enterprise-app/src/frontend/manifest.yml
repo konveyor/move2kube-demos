@@ -2,7 +2,6 @@
 applications:
 - name: frontend
   memory: 2G
-  random-route: true
   buildpack: https://github.com/cloudfoundry/nodejs-buildpack
   command: npm run start
   instances: 1

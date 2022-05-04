@@ -2,8 +2,6 @@ move2kube:
   containerruntime: docker
   minreplicas: "2"
   services:
-    config-utils:
-      enable: false
     customers:
       "8080":
         servicetype: ClusterIP

@@ -124,14 +124,12 @@ spec:
       hints:
         - The services unselected here will be ignored.
       options:
-        - config-utils
         - customers
         - frontend
         - gateway
         - inventory
         - orders
       default:
-        - config-utils
         - customers
         - frontend
         - gateway

@@ -5,18 +5,6 @@ metadata:
 spec:
   sourceDir: src
   services:
-    config-utils:
-      - transformerName: Maven
-        paths:
-          MavenPom:
-            - config-utils/pom.xml
-          ServiceDirPath:
-            - config-utils
-        configs:
-          Maven:
-            mavenAppName: config-utils
-            artifactType: jar
-            mvnwPresent: false
     customers:
       - transformerName: Maven
         paths:

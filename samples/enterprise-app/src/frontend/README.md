@@ -66,15 +66,15 @@ const gateway_svc = `http://gateway-sable-ga.mybluemix.net`;
 proxy: [
   {
     context: ['/customers-api'],
-    target: `http://gateway-sable-ga.mybluemix.net`,
+    target: `http://enterprise-app-2743220496-gateway.mybluemix.net`,
   },
   {
     context: ['/orders-api'],
-    target: `http://gateway-sable-ga.mybluemix.net`,
+    target: `http://enterprise-app-2743220496-gateway.mybluemix.net`,
   },
   {
     context: ['/products-api'],
-    target: `http://gateway-sable-ga.mybluemix.net`,
+    target: `http://enterprise-app-2743220496-gateway.mybluemix.net`,
   },
 ],
 ```
@@ -82,10 +82,23 @@ proxy: [
 Now, login to your Cloud Foundry account `cf login` and then run the below command to deploy the `frontend` service to Cloud Foundry.
 
 ```console
-$ cf push
+$ cf push --random-route
 ```
 
 By-default, the CF_STAGING_TIMEOUT environment variable is set to 15 minutes, but staging/starting the `frontend` service on Cloud Foundry may take more than 15 minutes and thus the `cf push` may fail, and to prevent this we have set the CF_STAGING_TIMEOUT to 25 minutes in the manifest.yml file.
+
+NOTE: The service can also be deployed with a different `name` other than what is specified in the manifest.yml file and without using the `random-route` flag by running the below commands, and that overrides the name present in the manifest.yml file. Since, we are not using the `random-route`, so first we will create a unique variable that no-one else will be using in the multi-tenant IBM Cloud Foundry environment.
+
+```console
+$ rand1=`echo $RANDOM$RANDOM`
+$ app="enterprise-app"
+$ appname=`echo $app-$rand1`
+$ echo $appname
+```
+```console
+$ cf push $appname-frontend
+```
+
 
 ## Configurations
 * [TypeScript Config](./tsconfig.json)

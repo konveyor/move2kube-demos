@@ -25,9 +25,9 @@ cf push $appname-customers
 cd ..
 
 cd gateway
-sed -i '' 's/http:\/\/localhost:8081/http:\/\/'"$appname"'-orders.mybluemix.net/g' src/main/resources/application-dev.properties
-sed -i '' 's/http:\/\/localhost:8082/http:\/\/'"$appname"'-customers.mybluemix.net/g' src/main/resources/application-dev.properties
-sed -i '' 's/http:\/\/localhost:8083/http:\/\/'"$appname"'-inventory.mybluemix.net/g' src/main/resources/application-dev.properties
+sed -i '' 's/http:\/\/orders:8081/http:\/\/'"$appname"'-orders.mybluemix.net/g' src/main/resources/application-dev.properties
+sed -i '' 's/http:\/\/customers:8082/http:\/\/'"$appname"'-customers.mybluemix.net/g' src/main/resources/application-dev.properties
+sed -i '' 's/http:\/\/inventory:8083/http:\/\/'"$appname"'-inventory.mybluemix.net/g' src/main/resources/application-dev.properties
 SPRING_PROFILES_ACTIVE=dev ./mvnw clean package -P dev
 cf push $appname-gateway
 cd ..

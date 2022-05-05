@@ -23,7 +23,7 @@ $ SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean spring-boot:run -P dev-inme
 Start the gateway service
 ```
 $ cd gateway
-$ SPRING_PROFILES_ACTIVE=dev ./mvnw clean spring-boot:run -P dev
+$ SPRING_PROFILES_ACTIVE=local ./mvnw clean spring-boot:run -P local
 ```
 
 Start the frontend website

@@ -14,7 +14,7 @@ There are 6 endpoints:
 ## Usage
 
 ```console
-$ SPRING_PROFILES_ACTIVE=dev ./mvnw clean spring-boot:run -P dev
+$ SPRING_PROFILES_ACTIVE=local ./mvnw clean spring-boot:run -P local
 ```
 
 Browse to:

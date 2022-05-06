@@ -133,6 +133,11 @@
 	</build>
 	<profiles>
 		<profile>
+			<id>local</id>
+			<activation />
+			<dependencies></dependencies>
+		</profile>
+		<profile>
 			<id>dev</id>
 			<activation />
 			<dependencies></dependencies>

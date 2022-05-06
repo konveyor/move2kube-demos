@@ -164,6 +164,18 @@
 	</build>
 	<profiles>
 		<profile>
+			<id>local</id>
+			<dependencies>
+				<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+				<dependency>
+					<groupId>com.h2database</groupId>
+					<artifactId>h2</artifactId>
+					<version>2.1.210</version>
+					<scope>runtime</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
 			<id>dev-inmemorydb</id>
 			<dependencies>
 				<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->

@@ -5,25 +5,25 @@
 Start the customer info backend API
 ```
 $ cd customers
-$ SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean spring-boot:run -P dev-inmemorydb
+$ SPRING_PROFILES_ACTIVE=local ./mvnw clean spring-boot:run -P local
 ```
 
 Start the order info backend API
 ```
 $ cd orders
-$ SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean spring-boot:run -P dev-inmemorydb
+$ SPRING_PROFILES_ACTIVE=local ./mvnw clean spring-boot:run -P local
 ```
 
 Start the product info backend API
 ```
 $ cd inventory
-$ SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean spring-boot:run -P dev-inmemorydb
+$ SPRING_PROFILES_ACTIVE=local ./mvnw clean spring-boot:run -P local
 ```
 
 Start the gateway service
 ```
 $ cd gateway
-$ SPRING_PROFILES_ACTIVE=dev ./mvnw clean spring-boot:run -P dev
+$ SPRING_PROFILES_ACTIVE=local ./mvnw clean spring-boot:run -P local
 ```
 
 Start the frontend website

@@ -10,7 +10,7 @@ There are 2 endpoints:
 ## Usage
 
 ```
-$ SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean spring-boot:run -P dev-inmemorydb
+$ SPRING_PROFILES_ACTIVE=local ./mvnw clean spring-boot:run -P local
 ```
 
 Browse to http://localhost:8080/customers

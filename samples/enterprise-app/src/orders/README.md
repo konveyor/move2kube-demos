@@ -26,5 +26,17 @@ $ SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean package -P dev-inmemorydb
 ```
 
 ```console
-$ cf push
+$ cf push --random-route
+```
+
+NOTE: The service can also be deployed with a different `name` other than what is specified in the manifest.yml file and without using the `random-route` flag by running the below commands, and that overrides the name present in the manifest.yml file. Since, we are not using the `random-route`, so first we will create a unique variable that no-one else will be using in the multi-tenant IBM Cloud Foundry environment.
+
+```console
+$ rand1=`echo $RANDOM$RANDOM`
+$ app="enterprise-app"
+$ appname=`echo $app-$rand1`
+$ echo $appname
+```
+```console
+$ cf push $appname-orders
 ```

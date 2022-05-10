@@ -55,6 +55,11 @@ Run the `deploy-to-cf.sh` script to automatically deploy the services of enterpr
 $ source deploy-to-cf.sh
 ```
 
+To deploy to IBM Cloud Foundry, run the below command.
+```console
+$ source deploy-to-ibmcloud-cf.sh
+```
+
 ```console
 $ echo "appname is- $appname"
 ```

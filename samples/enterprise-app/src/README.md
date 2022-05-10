@@ -55,7 +55,8 @@ Run the `deploy-to-cf.sh` script to automatically deploy the services of enterpr
 $ source deploy-to-cf.sh
 ```
 
-To deploy to IBM Cloud Foundry, run the below command.
+To deploy to IBM Cloud Foundry, run the below command. Make sure you are logged in to IBM Cloud `ibmcloud login --sso` or `ibmcloud login` and have targeted your Cloud Foundry organization, space and resource group `ibmcloud target -g <RESOURCE-GROUP> --cf`.
+
 ```console
 $ source deploy-to-ibmcloud-cf.sh
 ```

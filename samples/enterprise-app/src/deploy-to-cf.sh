@@ -5,65 +5,86 @@
 # cf login --sso
 
 rand1=`echo $RANDOM$RANDOM`
-app="enterprise-app"
-export appname=`echo $app-$rand1`
+set working_dir `echo $PWD`
+set app "enterprise-app"
+set appname `echo $app-$rand1`
 echo "appname is: $appname"
 
-echo "\n\n========== Deploying Orders service to Cloud Foundry =================="
+trap "trap_ctrl_c" INT
+
+function trap_ctrl_c ()
+{
+    echo "Ctrl-C caught.. Performing clean up!"
+    cd $working_dir
+}
+
+echo "\n======================================================================="
+echo "========== Deploying Orders service to Cloud Foundry =================="
 cd orders
 SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean package -P dev-inmemorydb
 cf push $appname-orders
-cd ..
-echo "=============== Orders deployed to Cloud Foundry ======================"
+rm -rf target
 
-
-echo "\n\n========== Deploying Inventory service to Cloud Foundry ==============="
-cd inventory
+echo "\n\n======================================================================="
+echo "========== Deploying Inventory service to Cloud Foundry ==============="
+cd $working_dir/inventory
 SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean package -P dev-inmemorydb
 cf push $appname-inventory
-cd ..
-echo "=============== Inventory deployed to Cloud Foundry ==================="
+rm -rf target
 
-
-echo "\n\n========== Deploying Customers service to Cloud Foundry ==============="
-cd customers
+echo "\n\n======================================================================="
+echo "========== Deploying Customers service to Cloud Foundry ==============="
+cd $working_dir/customers
 SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean package -P dev-inmemorydb
 cf push $appname-customers
-cd ..
-echo "=============== Customers deployed to Cloud Foundry ==================="
+rm -rf target
 
-
-echo "\n\n========== Deploying Gateway service to Cloud Foundry ================="
-cd gateway
+echo "\n\n======================================================================="
+echo "========== Deploying Gateway service to Cloud Foundry ================="
+cd $working_dir/gateway
 sed -i '' 's/http:\/\/orders:8080/http:\/\/'"$appname"'-orders.mybluemix.net/g' src/main/resources/application-dev.properties
 sed -i '' 's/http:\/\/customers:8080/http:\/\/'"$appname"'-customers.mybluemix.net/g' src/main/resources/application-dev.properties
 sed -i '' 's/http:\/\/inventory:8080/http:\/\/'"$appname"'-inventory.mybluemix.net/g' src/main/resources/application-dev.properties
 SPRING_PROFILES_ACTIVE=dev ./mvnw clean package -P dev
 cf push $appname-gateway
-cd ..
-echo "=============== Gateway deployed to Cloud Foundry ====================="
+cd $working_dir/gateway # If the user presses ctrl-c during previous step it will take to the $working_dir
+rm -rf target
+sed -i '' 's/http:\/\/'"$appname"'-orders.mybluemix.net/http:\/\/orders:8080/g' src/main/resources/application-dev.properties
+sed -i '' 's/http:\/\/'"$appname"'-customers.mybluemix.net/http:\/\/customers:8080/g' src/main/resources/application-dev.properties
+sed -i '' 's/http:\/\/'"$appname"'-inventory.mybluemix.net/http:\/\/inventory:8080/g' src/main/resources/application-dev.properties
 
-
-echo "\n\n========== Deploying Frontend service to Cloud Foundry ================"
-cd frontend
+echo "\n\n======================================================================="
+echo "========== Deploying Frontend service to Cloud Foundry ================"
+cd $working_dir/frontend
 sed -i '' 's|const gateway_svc.*|const gateway_svc = "http:\/\/\'"$appname"'-gateway.mybluemix.net";|g' server.js
 sed -i '' 's/http:\/\/localhost:8080/http:\/\/'"$appname"'-gateway.mybluemix.net/g' webpack.dev.js
 CF_STAGING_TIMEOUT=30 cf push $appname-frontend
-echo "=============== Frontend deployed to Cloud Foundry ===================="
+cd $working_dir/frontend # If the user presses ctrl-c during previous step it will take to the $working_dir
+sed -i '' 's|const gateway_svc = "http:\/\/\'"$appname"'-gateway.mybluemix.net";|const gateway_svc = `http:\/\/${argv.gateway}`;|g' server.js
+sed -i '' 's/http:\/\/'"$appname"'-gateway.mybluemix.net/http:\/\/localhost:8080/g' webpack.dev.js
 
-echo "\n\n\nYour appname is $appname and you can use that to connect to the different components of the enterprise-app individually and test them."
+cd $working_dir
 
-echo "\n\n=========== Testing the deployments of the backend services ==========="
-echo "Testing $appname-inventory:"
-curl http://$appname-inventory.mybluemix.net/products
+echo "\n\n======================================================================="
+echo "======================================================================="
+echo "\nYour appname is '$appname'"
+echo "You can use the appname to connect to the different components of the enterprise-app individually and test them."
 
-echo "Testing $appname-customers:"
-curl http://$appname-customers.mybluemix.net/customers
 
-echo "Testing $appname-orders:"
-curl http://$appname-orders.mybluemix.net/orders
+echo "\n\n=========== Testing the Cloud Foundry deployments of the enterprise-app services ==========="
+echo "\n$appname-inventory:"
+echo "curl http://$appname-inventory.mybluemix.net/products"
 
-echo "Testing $appname-gateway:"
-curl http://$appname-gateway.mybluemix.net/customers
-curl http://$appname-gateway.mybluemix.net/orders
-curl http://$appname-gateway.mybluemix.net/products
+echo "\n$appname-customers:"
+echo "curl http://$appname-customers.mybluemix.net/customers"
+
+echo "\n$appname-orders:"
+echo "curl http://$appname-orders.mybluemix.net/orders"
+
+echo "\n$appname-gateway:"
+echo "curl http://$appname-gateway.mybluemix.net/customers"
+echo "curl http://$appname-gateway.mybluemix.net/orders"
+echo "curl http://$appname-gateway.mybluemix.net/products"
+
+echo "\n$appname-frontend:
+Visit http://$appname-frontend.mybluemix.net URL on your browser."

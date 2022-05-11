@@ -27,6 +27,7 @@ function trap_ctrl_c ()
 
 echo "\n======================================================================="
 echo "========== Deploying Orders service to Cloud Foundry =================="
+echo "\n======================================================================="
 cd orders
 SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean package -P dev-inmemorydb
 ibmcloud cf push $appname-orders
@@ -34,6 +35,7 @@ rm -rf target
 
 echo "\n\n======================================================================="
 echo "========== Deploying Inventory service to Cloud Foundry ==============="
+echo "\n======================================================================="
 cd $working_dir/inventory
 SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean package -P dev-inmemorydb
 ibmcloud cf push $appname-inventory
@@ -41,6 +43,7 @@ rm -rf target
 
 echo "\n\n======================================================================="
 echo "========== Deploying Customers service to Cloud Foundry ==============="
+echo "\n======================================================================="
 cd $working_dir/customers
 SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean package -P dev-inmemorydb
 ibmcloud cf push $appname-customers
@@ -48,6 +51,7 @@ rm -rf target
 
 echo "\n\n======================================================================="
 echo "========== Deploying Gateway service to Cloud Foundry ================="
+echo "\n======================================================================="
 cd $working_dir/gateway
 sed -i '' 's/http:\/\/orders:8080/http:\/\/'"$appname"'-orders.mybluemix.net/g' src/main/resources/application-dev.properties
 sed -i '' 's/http:\/\/customers:8080/http:\/\/'"$appname"'-customers.mybluemix.net/g' src/main/resources/application-dev.properties
@@ -62,6 +66,8 @@ sed -i '' 's/http:\/\/'"$appname"'-inventory.mybluemix.net/http:\/\/inventory:80
 
 echo "\n\n======================================================================="
 echo "========== Deploying Frontend service to Cloud Foundry ================"
+echo "\n======================================================================="
+
 cd $working_dir/frontend
 sed -i '' 's|const gateway_svc.*|const gateway_svc = "http:\/\/\'"$appname"'-gateway.mybluemix.net";|g' server.js
 sed -i '' 's/http:\/\/localhost:8080/http:\/\/'"$appname"'-gateway.mybluemix.net/g' webpack.dev.js
@@ -95,3 +101,6 @@ echo "curl http://$appname-gateway.mybluemix.net/products"
 
 echo "\n$appname-frontend:
 Visit http://$appname-frontend.mybluemix.net URL on your browser."
+
+echo "\n\n======================================================================="
+echo "======================================================================="

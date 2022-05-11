@@ -64,7 +64,7 @@ curl http://$appname-customers.mybluemix.net/customers
 echo "Testing $appname-orders:"
 curl http://$appname-orders.mybluemix.net/orders
 
-echo "Testing $appname-gateway:""
+echo "Testing $appname-gateway:"
 curl http://$appname-gateway.mybluemix.net/customers
 curl http://$appname-gateway.mybluemix.net/orders
 curl http://$appname-gateway.mybluemix.net/products

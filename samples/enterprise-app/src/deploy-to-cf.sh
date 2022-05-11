@@ -4,6 +4,11 @@
 # cf login
 # cf login --sso
 
+if [[ "$(basename "$PWD")" != 'src' ]] ; then
+  echo 'Please run this script from the "src" directory'
+  exit 1
+fi
+
 rand1=`echo $RANDOM$RANDOM`
 set working_dir `echo $PWD`
 set app "enterprise-app"

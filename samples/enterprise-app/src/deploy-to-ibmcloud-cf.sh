@@ -4,6 +4,12 @@
 # ibmcloud login
 # ibmcloud login --sso
 # ibmcloud target -g <RESOURCE-GROUP> --cf
+# ibmcloud cf install
+
+if [[ "$(basename "$PWD")" != 'src' ]] ; then
+  echo 'Please run this script from the "src" directory'
+  exit 1
+fi
 
 rand1=`echo $RANDOM$RANDOM`
 set working_dir `echo $PWD`

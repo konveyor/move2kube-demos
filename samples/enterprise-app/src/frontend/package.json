@@ -6,6 +6,9 @@
   "homepage": "https://www.konveyor.io/",
   "license": "MIT",
   "private": true,
+  "engines": {
+    "node": "<16.15"
+  },
   "scripts": {
     "prebuild": "npm run clean",
     "dr:surge": "node dr-surge.js",

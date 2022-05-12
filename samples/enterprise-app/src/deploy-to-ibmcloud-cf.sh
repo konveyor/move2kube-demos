@@ -11,10 +11,11 @@ if [[ "$(basename "$PWD")" != 'src' ]] ; then
   exit 1
 fi
 
+export working_dir=`echo $PWD`
+echo $RANDOM$RANDOM > /dev/null # In zsh, to clear the cached $RANDOM$RANDOM value
 rand1=`echo $RANDOM$RANDOM`
-set working_dir `echo $PWD`
 set app "enterprise-app"
-set appname `echo $app-$rand1`
+export appname=`echo $app-$rand1`
 echo "appname is: $appname"
 
 trap "trap_ctrl_c" INT
@@ -27,7 +28,7 @@ function trap_ctrl_c ()
 
 echo "\n======================================================================="
 echo "========== Deploying Orders service to Cloud Foundry =================="
-echo "\n======================================================================="
+echo "======================================================================="
 cd orders
 SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean package -P dev-inmemorydb
 ibmcloud cf push $appname-orders
@@ -35,7 +36,7 @@ rm -rf target
 
 echo "\n\n======================================================================="
 echo "========== Deploying Inventory service to Cloud Foundry ==============="
-echo "\n======================================================================="
+echo "======================================================================="
 cd $working_dir/inventory
 SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean package -P dev-inmemorydb
 ibmcloud cf push $appname-inventory
@@ -43,7 +44,7 @@ rm -rf target
 
 echo "\n\n======================================================================="
 echo "========== Deploying Customers service to Cloud Foundry ==============="
-echo "\n======================================================================="
+echo "======================================================================="
 cd $working_dir/customers
 SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean package -P dev-inmemorydb
 ibmcloud cf push $appname-customers
@@ -51,7 +52,7 @@ rm -rf target
 
 echo "\n\n======================================================================="
 echo "========== Deploying Gateway service to Cloud Foundry ================="
-echo "\n======================================================================="
+echo "======================================================================="
 cd $working_dir/gateway
 sed -i '' 's/http:\/\/orders:8080/http:\/\/'"$appname"'-orders.mybluemix.net/g' src/main/resources/application-dev.properties
 sed -i '' 's/http:\/\/customers:8080/http:\/\/'"$appname"'-customers.mybluemix.net/g' src/main/resources/application-dev.properties

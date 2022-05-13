@@ -123,3 +123,5 @@ Visit http://$appname-frontend.mybluemix.net URL on your browser. Please refresh
 
 echo "\n\n======================================================================="
 echo "======================================================================="
+
+trap - INT

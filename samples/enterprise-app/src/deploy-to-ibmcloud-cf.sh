@@ -11,11 +11,11 @@ if [[ "$(basename "$PWD")" != 'src' ]] ; then
   exit 1
 fi
 
-export working_dir=`echo $PWD`
+working_dir=`echo $PWD`
 echo $RANDOM$RANDOM > /dev/null # In zsh, to clear the cached $RANDOM$RANDOM value
 rand1=`echo $RANDOM$RANDOM`
-set app "enterprise-app"
-export appname=`echo $app-$rand1`
+app=`echo enterprise-app`
+appname=`echo $app-$rand1`
 echo "appname is: $appname"
 
 trap "trap_ctrl_c" INT
@@ -54,29 +54,49 @@ echo "\n\n======================================================================
 echo "========== Deploying Gateway service to Cloud Foundry ================="
 echo "======================================================================="
 cd $working_dir/gateway
-sed -i '' 's/http:\/\/orders:8080/http:\/\/'"$appname"'-orders.mybluemix.net/g' src/main/resources/application-dev.properties
-sed -i '' 's/http:\/\/customers:8080/http:\/\/'"$appname"'-customers.mybluemix.net/g' src/main/resources/application-dev.properties
-sed -i '' 's/http:\/\/inventory:8080/http:\/\/'"$appname"'-inventory.mybluemix.net/g' src/main/resources/application-dev.properties
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i '' 's/http:\/\/orders:8080/http:\/\/'"$appname"'-orders.mybluemix.net/g' src/main/resources/application-dev.properties
+    sed -i '' 's/http:\/\/customers:8080/http:\/\/'"$appname"'-customers.mybluemix.net/g' src/main/resources/application-dev.properties
+    sed -i '' 's/http:\/\/inventory:8080/http:\/\/'"$appname"'-inventory.mybluemix.net/g' src/main/resources/application-dev.properties
+else
+    sed -i 's/http:\/\/orders:8080/http:\/\/'"$appname"'-orders.mybluemix.net/g' src/main/resources/application-dev.properties
+    sed -i 's/http:\/\/customers:8080/http:\/\/'"$appname"'-customers.mybluemix.net/g' src/main/resources/application-dev.properties
+    sed -i 's/http:\/\/inventory:8080/http:\/\/'"$appname"'-inventory.mybluemix.net/g' src/main/resources/application-dev.properties
+fi
 SPRING_PROFILES_ACTIVE=dev ./mvnw clean package -P dev
 ibmcloud cf push $appname-gateway
 cd $working_dir/gateway # If the user presses ctrl-c during previous step it will take to the $working_dir
 rm -rf target
-sed -i '' 's/http:\/\/'"$appname"'-orders.mybluemix.net/http:\/\/orders:8080/g' src/main/resources/application-dev.properties
-sed -i '' 's/http:\/\/'"$appname"'-customers.mybluemix.net/http:\/\/customers:8080/g' src/main/resources/application-dev.properties
-sed -i '' 's/http:\/\/'"$appname"'-inventory.mybluemix.net/http:\/\/inventory:8080/g' src/main/resources/application-dev.properties
-
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i '' 's/http:\/\/'"$appname"'-orders.mybluemix.net/http:\/\/orders:8080/g' src/main/resources/application-dev.properties
+    sed -i '' 's/http:\/\/'"$appname"'-customers.mybluemix.net/http:\/\/customers:8080/g' src/main/resources/application-dev.properties
+    sed -i '' 's/http:\/\/'"$appname"'-inventory.mybluemix.net/http:\/\/inventory:8080/g' src/main/resources/application-dev.properties
+else
+    sed -i 's/http:\/\/'"$appname"'-orders.mybluemix.net/http:\/\/orders:8080/g' src/main/resources/application-dev.properties
+    sed -i 's/http:\/\/'"$appname"'-customers.mybluemix.net/http:\/\/customers:8080/g' src/main/resources/application-dev.properties
+    sed -i 's/http:\/\/'"$appname"'-inventory.mybluemix.net/http:\/\/inventory:8080/g' src/main/resources/application-dev.properties
+fi
 echo "\n\n======================================================================="
 echo "========== Deploying Frontend service to Cloud Foundry ================"
-echo "\n======================================================================="
+echo "======================================================================="
 
 cd $working_dir/frontend
-sed -i '' 's|const gateway_svc.*|const gateway_svc = "http:\/\/\'"$appname"'-gateway.mybluemix.net";|g' server.js
-sed -i '' 's/http:\/\/localhost:8080/http:\/\/'"$appname"'-gateway.mybluemix.net/g' webpack.dev.js
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i '' 's|const gateway_svc.*|const gateway_svc = `http:\/\/\'"$appname"'-gateway.mybluemix.net`;|g' server.js
+    sed -i '' 's/http:\/\/localhost:8080/http:\/\/'"$appname"'-gateway.mybluemix.net/g' webpack.dev.js
+else
+    sed -i 's|const gateway_svc.*|const gateway_svc = `http:\/\/\'"$appname"'-gateway.mybluemix.net`;|g' server.js
+    sed -i 's/http:\/\/localhost:8080/http:\/\/'"$appname"'-gateway.mybluemix.net/g' webpack.dev.js
+fi
 CF_STAGING_TIMEOUT=30 ibmcloud cf push $appname-frontend
 cd $working_dir/frontend # If the user presses ctrl-c during previous step it will take to the $working_dir
-sed -i '' 's|const gateway_svc = "http:\/\/\'"$appname"'-gateway.mybluemix.net";|const gateway_svc = `http:\/\/${argv.gateway}`;|g' server.js
-sed -i '' 's/http:\/\/'"$appname"'-gateway.mybluemix.net/http:\/\/localhost:8080/g' webpack.dev.js
-
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i '' 's|const gateway_svc = `http:\/\/\'"$appname"'-gateway.mybluemix.net`;|const gateway_svc = `http:\/\/${argv.gateway}`;|g' server.js
+    sed -i '' 's/http:\/\/'"$appname"'-gateway.mybluemix.net/http:\/\/localhost:8080/g' webpack.dev.js
+else
+    sed -i 's|const gateway_svc = `http:\/\/\'"$appname"'-gateway.mybluemix.net`;|const gateway_svc = `http:\/\/${argv.gateway}`;|g' server.js
+    sed -i 's/http:\/\/'"$appname"'-gateway.mybluemix.net/http:\/\/localhost:8080/g' webpack.dev.js
+fi
 cd $working_dir
 
 echo "\n\n======================================================================="
@@ -101,7 +121,7 @@ echo "curl http://$appname-gateway.mybluemix.net/orders"
 echo "curl http://$appname-gateway.mybluemix.net/products"
 
 echo "\n$appname-frontend:
-Visit http://$appname-frontend.mybluemix.net URL on your browser."
+Visit http://$appname-frontend.mybluemix.net URL on your browser. Please refresh the page if it appears blank."
 
 echo "\n\n======================================================================="
 echo "======================================================================="

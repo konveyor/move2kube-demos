@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
-# This script deploys the services of the enterprise-app to Cloud Foundry.
-# Login to Cloud Foundry before running this script or uncomment the command below and run the script.
-# cf login
-# cf login --sso
+# This script deploys the services of the enterprise-app to IBM Cloud Foundry.
+# Login to IBM Cloud before running this script or uncomment the command below and run the script.
+# ibmcloud login
+# ibmcloud login --sso
+# ibmcloud target -g <RESOURCE-GROUP> --cf
+# ibmcloud cf install
 
 if [[ "$(basename "$PWD")" != 'src' ]] ; then
   echo 'Please run this script from the "src" directory'
@@ -29,7 +31,7 @@ echo "========== Deploying Orders service to Cloud Foundry =================="
 echo "======================================================================="
 cd orders
 SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean package -P dev-inmemorydb
-cf push $appname-orders
+ibmcloud cf push $appname-orders
 rm -rf target
 
 echo "\n\n======================================================================="
@@ -37,7 +39,7 @@ echo "========== Deploying Inventory service to Cloud Foundry ==============="
 echo "======================================================================="
 cd $working_dir/inventory
 SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean package -P dev-inmemorydb
-cf push $appname-inventory
+ibmcloud cf push $appname-inventory
 rm -rf target
 
 echo "\n\n======================================================================="
@@ -45,7 +47,7 @@ echo "========== Deploying Customers service to Cloud Foundry ==============="
 echo "======================================================================="
 cd $working_dir/customers
 SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean package -P dev-inmemorydb
-cf push $appname-customers
+ibmcloud cf push $appname-customers
 rm -rf target
 
 echo "\n\n======================================================================="
@@ -62,7 +64,7 @@ else
     sed -i 's/http:\/\/inventory:8080/http:\/\/'"$appname"'-inventory.mybluemix.net/g' src/main/resources/application-dev.properties
 fi
 SPRING_PROFILES_ACTIVE=dev ./mvnw clean package -P dev
-cf push $appname-gateway
+ibmcloud cf push $appname-gateway
 cd $working_dir/gateway # If the user presses ctrl-c during previous step it will take to the $working_dir
 rm -rf target
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -86,7 +88,7 @@ else
     sed -i 's|const gateway_svc.*|const gateway_svc = `http:\/\/\'"$appname"'-gateway.mybluemix.net`;|g' server.js
     sed -i 's/http:\/\/localhost:8080/http:\/\/'"$appname"'-gateway.mybluemix.net/g' webpack.dev.js
 fi
-CF_STAGING_TIMEOUT=30 cf push $appname-frontend
+CF_STAGING_TIMEOUT=30 ibmcloud cf push $appname-frontend
 cd $working_dir/frontend # If the user presses ctrl-c during previous step it will take to the $working_dir
 if [[ "$OSTYPE" == "darwin"* ]]; then
     sed -i '' 's|const gateway_svc = `http:\/\/\'"$appname"'-gateway.mybluemix.net`;|const gateway_svc = `http:\/\/${argv.gateway}`;|g' server.js

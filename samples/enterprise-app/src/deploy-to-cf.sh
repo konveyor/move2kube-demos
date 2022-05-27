@@ -80,19 +80,19 @@ echo "======================================================================="
 
 cd $working_dir/frontend
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    sed -i '' 's|const gateway_svc.*|const gateway_svc = `http:\/\/\'"$appname"'-gateway.mybluemix.net`;|g' server.js
+    sed -i '' 's|let gateway_svc.*|let gateway_svc = `http:\/\/\'"$appname"'-gateway.mybluemix.net`;|g' server.js
     sed -i '' 's/http:\/\/localhost:8080/http:\/\/'"$appname"'-gateway.mybluemix.net/g' webpack.dev.js
 else
-    sed -i 's|const gateway_svc.*|const gateway_svc = `http:\/\/\'"$appname"'-gateway.mybluemix.net`;|g' server.js
+    sed -i 's|let gateway_svc.*|let gateway_svc = `http:\/\/\'"$appname"'-gateway.mybluemix.net`;|g' server.js
     sed -i 's/http:\/\/localhost:8080/http:\/\/'"$appname"'-gateway.mybluemix.net/g' webpack.dev.js
 fi
 CF_STAGING_TIMEOUT=30 cf push $appname-frontend
 cd $working_dir/frontend # If the user presses ctrl-c during previous step it will take to the $working_dir
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    sed -i '' 's|const gateway_svc = `http:\/\/\'"$appname"'-gateway.mybluemix.net`;|const gateway_svc = `http:\/\/${argv.gateway}`;|g' server.js
+    sed -i '' 's|let gateway_svc = `http:\/\/\'"$appname"'-gateway.mybluemix.net`;|let gateway_svc = `http:\/\/${argv.gateway}`;|g' server.js
     sed -i '' 's/http:\/\/'"$appname"'-gateway.mybluemix.net/http:\/\/localhost:8080/g' webpack.dev.js
 else
-    sed -i 's|const gateway_svc = `http:\/\/\'"$appname"'-gateway.mybluemix.net`;|const gateway_svc = `http:\/\/${argv.gateway}`;|g' server.js
+    sed -i 's|let gateway_svc = `http:\/\/\'"$appname"'-gateway.mybluemix.net`;|let gateway_svc = `http:\/\/${argv.gateway}`;|g' server.js
     sed -i 's/http:\/\/'"$appname"'-gateway.mybluemix.net/http:\/\/localhost:8080/g' webpack.dev.js
 fi
 cd $working_dir

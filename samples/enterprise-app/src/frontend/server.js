@@ -22,7 +22,7 @@ app.use(cors({
   'preflightContinue': true
 }));
 
-const gateway_svc = process.env.M2K_DEMO_GATEWAY_URL || `http://${argv.gateway}`;
+const gateway_svc = process.env.ENTERPRISE_APP_GATEWAY_URL || `http://${argv.gateway}`;
 
 let customerApiProxyOptions = {
   target: gateway_svc,

@@ -55,9 +55,9 @@ echo "======================================================================="
 cd "$working_dir"/gateway || exit
 SPRING_PROFILES_ACTIVE=dev ./mvnw clean package -P dev
 $CF_CLI_TOOL push "$appname"-gateway \
-    --var M2K_DEMO_CUSTOMERS_URL="http://$appname-customers.mybluemix.net/customers" \
-    --var M2K_DEMO_INVENTORY_URL="http://$appname-inventory.mybluemix.net/products" \
-    --var M2K_DEMO_ORDERS_URL="http://$appname-orders.mybluemix.net/orders"
+    --var ENTERPRISE_APP_CUSTOMERS_URL="http://$appname-customers.mybluemix.net/customers" \
+    --var ENTERPRISE_APP_INVENTORY_URL="http://$appname-inventory.mybluemix.net/products" \
+    --var ENTERPRISE_APP_ORDERS_URL="http://$appname-orders.mybluemix.net/orders"
 cd "$working_dir"/gateway || exit # If the user presses ctrl-c during previous step it will take to the $working_dir
 rm -rf target
 
@@ -65,7 +65,7 @@ echo -e "\n\n===================================================================
 echo "========== Deploying Frontend service to Cloud Foundry ================"
 echo "======================================================================="
 cd "$working_dir"/frontend || exit
-CF_STAGING_TIMEOUT=30 $CF_CLI_TOOL push "$appname"-frontend --var M2K_DEMO_GATEWAY_URL="http://$appname-gateway.mybluemix.net"
+CF_STAGING_TIMEOUT=30 $CF_CLI_TOOL push "$appname"-frontend --var ENTERPRISE_APP_GATEWAY_URL="http://$appname-gateway.mybluemix.net"
 cd "$working_dir" || exit
 
 echo -e "\n\n======================================================================="

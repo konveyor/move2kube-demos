@@ -12,7 +12,7 @@ $ npm install && npm run start:dev
 
 1. Login to your Cloud Foundry account (`cf login` or `cf login --sso`) if you haven't done so already.
 1. First, deploy the [gateway](https://github.com/konveyor/move2kube-demos/tree/main/samples/enterprise-app/src/gateway#deploying-to-cloud-foundry) service to Cloud Foundry before deploying the `frontend` service.
-1. Using the same `$appname` that was used to deploy the backend and `gateway` services, run the below commands to deploy the `frontend` service to Cloud Foundry.
+1. Using the same `$appname` that was used to deploy the backend and `gateway` services, run the below command to deploy the `frontend` service to Cloud Foundry.
     ```sh
     $ cf push "$appname"-frontend --var ENTERPRISE_APP_GATEWAY_URL="http://$appname-gateway.mybluemix.net"
     ```

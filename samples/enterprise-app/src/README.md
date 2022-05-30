@@ -35,34 +35,21 @@ kubectl create rolebinding default-view --clusterrole=view --serviceaccount=<NAM
 
 ## Running Locally
 
-Applications can also run locally for testing purposes. In this case, the command to be used varies between Spring Boot and Quarkus. In the first case, the command is as follows:
-
-```
-mvn clean spring-boot:run -P local
-```
-
-For Quarkus services, the command is the following:
-
-```
-./mvnw compile quarkus:dev -P local
-```
+Refer to [USAGE.md](./USAGE.md) for instructions on running the application locally for testing purposes.
 
 ## Deploying to Cloud Foundry
 
-Run the `deploy-to-cf.sh` script to automatically deploy the services of enterprise-app to Cloud Foundry. Make sure you are logged in to Cloud Foundry (`cf login` or `cf login --sso`) before running this script.
+1. Make sure you are logged in to Cloud Foundry (`cf login` or `cf login --sso`).
+1. Run the `deploy-to-cf.sh` script to automatically deploy the services of enterprise-app to Cloud Foundry.
 
 ```console
-$ source deploy-to-cf.sh
+$ ./deploy-to-cf.sh
 ```
 
 To deploy to IBM Cloud Foundry, run the below command. Make sure you are logged in to IBM Cloud `ibmcloud login --sso` or `ibmcloud login` and have targeted your Cloud Foundry organization, space and resource group `ibmcloud target -g <RESOURCE-GROUP> --cf`. It is required to install the [Cloud Foundry CLI](https://cloud.ibm.com/docs/cli?topic=cli-ibmcloud_cli#ibmcloud_cf_install) for IBM Cloud CLI before running the script (`ibmcloud cf install`).
 
 ```console
-$ source deploy-to-ibmcloud-cf.sh
-```
-
-```console
-$ echo "appname is- $appname"
+$ CF_CLI_TOOL='ibmcloud cf' ./deploy-to-cf.sh
 ```
 
 You can also manually deploy each of the services to Cloud Foudry and the instructions about that are given in the README file of each of the services.

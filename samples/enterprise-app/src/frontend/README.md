@@ -1,14 +1,24 @@
 # Frontend
 
-The Retail application used to demonstrate all Konveyor projects in an end to end demo.
+The e-commerce store website that communicates with the backend services using REST APIs.
 
 ## Quick-start
 
-```bash
-git clone https://github.com/konveyor/mig-demo-apps
-cd mig-demo-apps/apps/e2e-demo
-npm install && npm run start:dev
+```sh
+$ npm install && npm run start:dev
 ```
+
+## Deploying to Cloud Foundry
+
+1. Login to your Cloud Foundry account (`cf login` or `cf login --sso`) if you haven't done so already.
+1. First, deploy the [gateway](https://github.com/konveyor/move2kube-demos/tree/main/samples/enterprise-app/src/gateway#deploying-to-cloud-foundry) service to Cloud Foundry before deploying the `frontend` service.
+1. Using the same `$appname` that was used to deploy the backend and `gateway` services, run the below command to deploy the `frontend` service to Cloud Foundry.
+    ```sh
+    $ cf push "$appname"-frontend --var ENTERPRISE_APP_GATEWAY_URL="http://$appname-gateway.mybluemix.net"
+    ```
+
+> Note: By-default, the `CF_STAGING_TIMEOUT` environment variable is set to 15 minutes, but staging/starting the `frontend` service on Cloud Foundry may take more than 15 minutes and thus the `cf push` may fail. To prevent this, we have set the `CF_STAGING_TIMEOUT` to 30 minutes in the manifest.yml file.
+
 
 ## Development scripts
 
@@ -46,59 +56,6 @@ npm run storybook
 # Build storybook component explorer as standalone app (outputs to "storybook-static" dir)
 npm run build:storybook
 ```
-
-## Deploying to Cloud Foundry
-
-First, deploy the [gateway](https://github.com/konveyor/move2kube-demos/tree/main/samples/enterprise-app/src/gateway#deploying-to-cloud-foundry) service to Cloud Foundry before deploying the `frontend` service.
-
-Next, update the endpoint URL of `gateway` service in the [server.js](https://github.com/konveyor/move2kube-demos/blob/main/samples/enterprise-app/src/frontend/server.js) file and the [webpack.dev.js](https://github.com/konveyor/move2kube-demos/blob/main/samples/enterprise-app/src/frontend/webpack.dev.js) using the App URL for the `gateway` service on Cloud Foundry. Make sure you use `http` in the service URLs and not `https`.
-For example:-
-
-[`server.js`](https://github.com/konveyor/move2kube-demos/blob/91e8051731f3508343ad51c0713fc36f05825d1b/samples/enterprise-app/src/frontend/server.js#L25)
-
-```console
-const gateway_svc = `http://gateway-sable-ga.mybluemix.net`;
-```
-
-[`webpack.dev.js`](https://github.com/konveyor/move2kube-demos/blob/91e8051731f3508343ad51c0713fc36f05825d1b/samples/enterprise-app/src/frontend/webpack.dev.js#L20)
-
-```console
-proxy: [
-  {
-    context: ['/customers-api'],
-    target: `http://enterprise-app-2743220496-gateway.mybluemix.net`,
-  },
-  {
-    context: ['/orders-api'],
-    target: `http://enterprise-app-2743220496-gateway.mybluemix.net`,
-  },
-  {
-    context: ['/products-api'],
-    target: `http://enterprise-app-2743220496-gateway.mybluemix.net`,
-  },
-],
-```
-
-Now, login to your Cloud Foundry account `cf login` and then run the below command to deploy the `frontend` service to Cloud Foundry.
-
-```console
-$ cf push --random-route
-```
-
-By-default, the CF_STAGING_TIMEOUT environment variable is set to 15 minutes, but staging/starting the `frontend` service on Cloud Foundry may take more than 15 minutes and thus the `cf push` may fail, and to prevent this we have set the CF_STAGING_TIMEOUT to 25 minutes in the manifest.yml file.
-
-NOTE: The service can also be deployed with a different `name` other than what is specified in the manifest.yml file and without using the `random-route` flag by running the below commands, and that overrides the name present in the manifest.yml file. Since, we are not using the `random-route`, so first we will create a unique variable that no-one else will be using in the multi-tenant IBM Cloud Foundry environment.
-
-```console
-$ rand1=`echo $RANDOM$RANDOM`
-$ app="enterprise-app"
-$ appname=`echo $app-$rand1`
-$ echo $appname
-```
-```console
-$ cf push $appname-frontend
-```
-
 
 ## Configurations
 * [TypeScript Config](./tsconfig.json)

@@ -22,11 +22,7 @@ app.use(cors({
   'preflightContinue': true
 }));
 
-let gateway_svc = `http://${argv.gateway}`;
-
-if (process.env.SERVICES_GATEWAY_URL){
-  gateway_svc = process.env.SERVICES_GATEWAY_URL;
-}
+const gateway_svc = process.env.ENTERPRISE_APP_GATEWAY_URL || `http://${argv.gateway}`;
 
 let customerApiProxyOptions = {
   target: gateway_svc,
@@ -40,11 +36,11 @@ let customerApiProxyOptions = {
 
 const customerApiProxy = createProxyMiddleware(customerApiProxyOptions);
 
-let orderApiProxyOptions = {
+const orderApiProxyOptions = {
   target: gateway_svc,
   changeOrigin: true,
   pathRewrite: {
-    '^/orders-api': `/`,
+    '^/orders-api': '/',
   },
   logLevel: 'debug',
   secure: false,
@@ -52,11 +48,11 @@ let orderApiProxyOptions = {
 
 const ordersApiProxy = createProxyMiddleware(orderApiProxyOptions);
 
-let cropsApiProxyOptions = {
+const cropsApiProxyOptions = {
   target: 'https://www.growstuff.org',
   changeOrigin: true,
   pathRewrite: {
-    '^/crops-api': `/`,
+    '^/crops-api': '/',
   },
   logLevel: 'debug',
   secure: false,
@@ -64,11 +60,11 @@ let cropsApiProxyOptions = {
 
 const cropsApiProxy = createProxyMiddleware(cropsApiProxyOptions);
 
-let productApiProxyOptions = {
+const productApiProxyOptions = {
   target: gateway_svc,
   changeOrigin: true,
   pathRewrite: {
-    '^/products-api': `/`,
+    '^/products-api': '/',
   },
   logLevel: 'debug',
   secure: false,

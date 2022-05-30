@@ -27,24 +27,14 @@ $ docker run --rm -it \
 
 ## Deploying to Cloud Foundry
 
-First login to your Cloud Foundry account `cf login` and then run the below commands to deploy the `customers` service to Cloud Foundry.
-
-```console
-$ SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean package -P dev-inmemorydb
-```
-
-```console
-$ cf push --random-route
-```
-
-NOTE: The service can also be deployed with a different `name` other than what is specified in the manifest.yml file and without using the `random-route` flag by running the below commands, and that overrides the name present in the manifest.yml file. Since, we are not using the `random-route`, so first we will create a unique variable that no-one else will be using in the multi-tenant IBM Cloud Foundry environment.
-
-```console
-$ rand1=`echo $RANDOM$RANDOM`
-$ app="enterprise-app"
-$ appname=`echo $app-$rand1`
-$ echo $appname
-```
-```console
-$ cf push $appname-customers
-```
+1. Login to your Cloud Foundry account (`cf login` or `cf login --sso`) if you haven't done so already.
+1. If you haven't set an `$appname` yet, then choose an appropriate name that doesn't clash with apps that have already been deployed to Cloud Foundry. Example:
+    ```sh
+    $ appname='my-new-enterprise-app'
+    ```
+    We will use this same `$appname` when deploying all the other services.
+1. Run the below commands to deploy the `customers` service to Cloud Foundry.
+    ```sh
+    $ SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean package -P dev-inmemorydb
+    $ cf push "$appname"-customers
+    ```

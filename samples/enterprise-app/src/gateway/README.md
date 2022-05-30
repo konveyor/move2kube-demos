@@ -24,38 +24,16 @@ Browse to:
 
 ## Deploying to Cloud Foundry
 
-First, deploy the backend services- [orders](https://github.com/konveyor/move2kube-demos/tree/main/samples/enterprise-app/src/orders#deploying-to-cloud-foundry), [customers](https://github.com/konveyor/move2kube-demos/tree/main/samples/enterprise-app/src/customers#deploying-to-cloud-foundry) and [inventory](https://github.com/konveyor/move2kube-demos/tree/main/samples/enterprise-app/src/inventory#deploying-to-cloud-foundry) to Cloud Foundry before deploying the `gateway` service.
-
-Next, update the endpoint URLs of `orders`, `inventory` and `customers` services in the [application-dev.properties](https://github.com/konveyor/move2kube-demos/blob/main/samples/enterprise-app/src/gateway/src/main/resources/application-dev.properties) file using the App URL for each of these services on Cloud Foundry. Make sure you use `http` in the service URLs in the application-dev.properties file, and not `https`.
-
-For example:-
-
-[`application-dev.properties`](https://github.com/konveyor/move2kube-demos/blob/91e8051731f3508343ad51c0713fc36f05825d1b/samples/enterprise-app/src/gateway/src/main/resources/application-dev.properties#L1)
-
-```console
-services.orders.url=http://enterprise-app-2743220496-orders.mybluemix.net/orders
-services.customers.url=http://enterprise-app-2743220496-customers.mybluemix.net/customers
-services.inventory.url=http://enterprise-app-2743220496-inventory.mybluemix.net/products
-```
-
-Now, login to your Cloud Foundry account `cf login` and then run the below commands to deploy the `gateway` service to Cloud Foundry.
-
-```console
-$ SPRING_PROFILES_ACTIVE=dev ./mvnw clean package -P dev
-```
-
-```console
-$ cf push --random-route
-```
-
-NOTE: The service can also be deployed with a different `name` other than what is specified in the manifest.yml file and without using the `random-route` flag by running the below commands, and that overrides the name present in the manifest.yml file. Since, we are not using the `random-route`, so first we will create a unique variable that no-one else will be using in the multi-tenant IBM Cloud Foundry environment.
-
-```console
-$ rand1=`echo $RANDOM$RANDOM`
-$ app="enterprise-app"
-$ appname=`echo $app-$rand1`
-$ echo $appname
-```
-```console
-$ cf push $appname-gateway
-```
+1. First, deploy the backend services to Cloud Foundry before deploying the `gateway` service.
+    - [orders](https://github.com/konveyor/move2kube-demos/tree/main/samples/enterprise-app/src/orders#deploying-to-cloud-foundry)
+    - [customers](https://github.com/konveyor/move2kube-demos/tree/main/samples/enterprise-app/src/customers#deploying-to-cloud-foundry)
+    - [inventory](https://github.com/konveyor/move2kube-demos/tree/main/samples/enterprise-app/src/inventory#deploying-to-cloud-foundry)
+1. Login to your Cloud Foundry account (`cf login` or `cf login --sso`) if you haven't done so already.
+1. Using the same `$appname` that was used to deploy the backend services, run the below commands to deploy the `gateway` service to Cloud Foundry.
+    ```sh
+    $ SPRING_PROFILES_ACTIVE=dev ./mvnw clean package -P dev
+    $ cf push "$appname"-gateway \
+        --var ENTERPRISE_APP_CUSTOMERS_URL="http://$appname-customers.mybluemix.net/customers" \
+        --var ENTERPRISE_APP_INVENTORY_URL="http://$appname-inventory.mybluemix.net/products" \
+        --var ENTERPRISE_APP_ORDERS_URL="http://$appname-orders.mybluemix.net/orders"
+    ```

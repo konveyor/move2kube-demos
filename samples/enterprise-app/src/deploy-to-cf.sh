@@ -26,11 +26,11 @@ function trap_ctrl_c () {
 }
 
 echo -e "\n\n======================================================================="
-echo "========== Deploying Orders service to Cloud Foundry =================="
+echo "========== Deploying Customers service to Cloud Foundry ==============="
 echo "======================================================================="
-cd "$working_dir"/orders || exit
+cd "$working_dir"/customers || exit
 SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean package -P dev-inmemorydb
-$CF_CLI_TOOL push "$appname"-orders
+$CF_CLI_TOOL push "$appname"-customers
 rm -rf target
 
 echo -e "\n\n======================================================================="
@@ -42,11 +42,11 @@ $CF_CLI_TOOL push "$appname"-inventory
 rm -rf target
 
 echo -e "\n\n======================================================================="
-echo "========== Deploying Customers service to Cloud Foundry ==============="
+echo "========== Deploying Orders service to Cloud Foundry =================="
 echo "======================================================================="
-cd "$working_dir"/customers || exit
+cd "$working_dir"/orders || exit
 SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean package -P dev-inmemorydb
-$CF_CLI_TOOL push "$appname"-customers
+$CF_CLI_TOOL push "$appname"-orders
 rm -rf target
 
 echo -e "\n\n======================================================================="
@@ -65,7 +65,7 @@ echo -e "\n\n===================================================================
 echo "========== Deploying Frontend service to Cloud Foundry ================"
 echo "======================================================================="
 cd "$working_dir"/frontend || exit
-CF_STAGING_TIMEOUT=30 $CF_CLI_TOOL push "$appname"-frontend --var ENTERPRISE_APP_GATEWAY_URL="http://$appname-gateway.mybluemix.net"
+$CF_CLI_TOOL push "$appname"-frontend --var ENTERPRISE_APP_GATEWAY_URL="http://$appname-gateway.mybluemix.net"
 cd "$working_dir" || exit
 
 echo -e "\n\n======================================================================="

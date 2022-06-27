@@ -32,6 +32,8 @@ spec:
                 secretKeyRef:
                   name: database-secret
                   key: password
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
           volumeMounts:
             - name: secret-volume
               readOnly: true

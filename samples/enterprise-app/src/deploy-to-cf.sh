@@ -56,7 +56,7 @@ echo "========== Deploying Customers service to Cloud Foundry ==============="
 echo "======================================================================="
 cd "$working_dir"/customers || exit
 SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean package -P dev-inmemorydb
-$CF_CLI_TOOL push -t 180 --hostname $appname-customers
+$CF_CLI_TOOL push -t 180 --hostname "$appname"-customers
 rm -rf target
 
 echo -e "\n\n======================================================================="
@@ -64,7 +64,7 @@ echo "========== Deploying Inventory service to Cloud Foundry ==============="
 echo "======================================================================="
 cd "$working_dir"/inventory || exit
 SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean package -P dev-inmemorydb
-$CF_CLI_TOOL push -t 180 --hostname $appname-inventory
+$CF_CLI_TOOL push -t 180 --hostname "$appname"-inventory
 rm -rf target
 
 echo -e "\n\n======================================================================="
@@ -72,7 +72,7 @@ echo "========== Deploying Orders service to Cloud Foundry =================="
 echo "======================================================================="
 cd "$working_dir"/orders || exit
 SPRING_PROFILES_ACTIVE=dev-inmemorydb ./mvnw clean package -P dev-inmemorydb
-$CF_CLI_TOOL push -t 180 --hostname $appname-orders
+$CF_CLI_TOOL push -t 180 --hostname "$appname"-orders
 rm -rf target
 
 echo -e "\n\n======================================================================="
@@ -80,7 +80,7 @@ echo "========== Deploying Gateway service to Cloud Foundry ================="
 echo "======================================================================="
 cd "$working_dir"/gateway || exit
 SPRING_PROFILES_ACTIVE=dev ./mvnw clean package -P dev
-$CF_CLI_TOOL push --no-start -t 180 --hostname $appname-gateway
+$CF_CLI_TOOL push --no-start -t 180 --hostname "$appname"-gateway
 $CF_CLI_TOOL set-env gateway ENTERPRISE_APP_CUSTOMERS_URL "http://$appname-customers.mybluemix.net/customers"
 $CF_CLI_TOOL set-env gateway ENTERPRISE_APP_INVENTORY_URL "http://$appname-inventory.mybluemix.net/products"
 $CF_CLI_TOOL set-env gateway ENTERPRISE_APP_ORDERS_URL "http://$appname-orders.mybluemix.net/orders"
@@ -93,7 +93,7 @@ echo -e "\n\n===================================================================
 echo "========== Deploying Frontend service to Cloud Foundry ================"
 echo "======================================================================="
 cd "$working_dir"/frontend || exit
-$CF_CLI_TOOL push --no-start -t 180 --hostname $appname-frontend
+$CF_CLI_TOOL push --no-start -t 180 --hostname "$appname"-frontend
 $CF_CLI_TOOL set-env frontend ENTERPRISE_APP_GATEWAY_URL "http://$appname-gateway.mybluemix.net"
 $CF_CLI_TOOL start frontend
 

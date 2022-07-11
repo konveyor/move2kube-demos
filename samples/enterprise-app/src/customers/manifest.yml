@@ -3,5 +3,6 @@ applications:
 - name: customers
   memory: 1G
   instances: 1
-  buildpack: https://github.com/cloudfoundry/java-buildpack
+  buildpacks:
+    - https://github.com/cloudfoundry/java-buildpack
   path: target/ROOT.war

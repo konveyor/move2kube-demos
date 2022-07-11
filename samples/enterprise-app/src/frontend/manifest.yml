@@ -2,9 +2,7 @@
 applications:
 - name: frontend
   memory: 2G
-  buildpack: https://github.com/cloudfoundry/nodejs-buildpack
+  buildpacks:
+    - https://github.com/cloudfoundry/nodejs-buildpack
   command: npm run start
   instances: 1
-  env:
-    CF_STAGING_TIMEOUT: 30
-    ENTERPRISE_APP_GATEWAY_URL: ((ENTERPRISE_APP_GATEWAY_URL))

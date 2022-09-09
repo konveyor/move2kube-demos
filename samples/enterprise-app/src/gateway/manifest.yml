@@ -3,11 +3,9 @@ applications:
 - name: gateway
   memory: 1G
   instances: 1
-  buildpack: https://github.com/cloudfoundry/java-buildpack
+  buildpacks:
+    - https://github.com/cloudfoundry/java-buildpack
   path: target/gateway-2.0.0-SNAPSHOT.jar
   env:
     SPRING_PROFILES_ACTIVE: dev
     JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{ enabled: false }'
-    ENTERPRISE_APP_CUSTOMERS_URL: ((ENTERPRISE_APP_CUSTOMERS_URL))
-    ENTERPRISE_APP_INVENTORY_URL: ((ENTERPRISE_APP_INVENTORY_URL))
-    ENTERPRISE_APP_ORDERS_URL: ((ENTERPRISE_APP_ORDERS_URL))

@@ -2,6 +2,9 @@
   "name" : "nodejs",
   "version" : "0.1.0",
   "description": "This is a test web server",
+  "engines": {
+    "node": "<16.15"
+  },
   "keywords": ["test", "webserver"],
   "scripts": {
         "start": "node main.js"

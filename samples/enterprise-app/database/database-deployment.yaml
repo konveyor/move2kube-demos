@@ -20,7 +20,7 @@ spec:
       name: database
     spec:
       containers:
-        - image: postgres
+        - image: postgres:14.5
           imagePullPolicy: Always
           name: database
           ports:

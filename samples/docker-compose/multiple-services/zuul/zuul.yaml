@@ -1,0 +1,4 @@
+zuul:
+  routes:
+    api: /api/**
+    web: /

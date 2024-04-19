@@ -81,7 +81,7 @@ jobs:
           ref: ${{ github.event.inputs.commit_ref }}
           fetch-depth: 0
       - name: create release draft
-        uses: konveyor/create-release-draft@v1
+        uses: konveyor/move2kube-create-release-draft@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.event.inputs.tag }}

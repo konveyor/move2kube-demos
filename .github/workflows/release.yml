@@ -40,7 +40,7 @@ jobs:
               tag_exists = true;
               core.info(`the tag ${tag} already exists on ${resp.data.object.type} ${resp.data.object.sha}`);
             } catch(err) {
-              if(err.status !== 404){
+              if(err.status !== 404 && err.status !== '404'){
                 throw err;
               }
             }
